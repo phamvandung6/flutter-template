@@ -10,9 +10,9 @@ abstract class BaseBlocEvent extends Equatable {
 
 /// Refresh event to reload data
 class RefreshEvent extends BaseBlocEvent {
-  final bool forceRefresh;
 
   const RefreshEvent({this.forceRefresh = false});
+  final bool forceRefresh;
 
   @override
   List<Object?> get props => [forceRefresh];
@@ -25,13 +25,13 @@ class ResetEvent extends BaseBlocEvent {
 
 /// Load more event for pagination
 class LoadMoreEvent extends BaseBlocEvent {
-  final int page;
-  final int limit;
 
   const LoadMoreEvent({
     required this.page,
     this.limit = 20,
   });
+  final int page;
+  final int limit;
 
   @override
   List<Object?> get props => [page, limit];
@@ -39,9 +39,9 @@ class LoadMoreEvent extends BaseBlocEvent {
 
 /// Retry event for error recovery
 class RetryEvent extends BaseBlocEvent {
-  final String? context;
 
   const RetryEvent({this.context});
+  final String? context;
 
   @override
   List<Object?> get props => [context];

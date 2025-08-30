@@ -1,19 +1,17 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/core/config/environments/development_config.dart';
+import 'package:flutter_template/core/config/environments/production_config.dart';
+import 'package:flutter_template/core/config/environments/staging_config.dart';
+import 'package:flutter_template/core/config/models/environment_config.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 import 'package:injectable/injectable.dart';
-
-import '../utils/logger.dart';
-import 'environments/development_config.dart';
-import 'environments/production_config.dart';
-import 'environments/staging_config.dart';
-import 'models/environment_config.dart';
 
 /// Global app configuration manager
 @lazySingleton
 class AppConfig {
+  AppConfig();
   static AppConfig? _instance;
   static EnvironmentConfig? _config;
-
-  AppConfig();
 
   /// Get singleton instance
   static AppConfig get instance {
@@ -39,13 +37,10 @@ class AppConfig {
     switch (env) {
       case AppEnvironment.development:
         _config = DevelopmentConfig.config;
-        break;
       case AppEnvironment.staging:
         _config = StagingConfig.config;
-        break;
       case AppEnvironment.production:
         _config = ProductionConfig.config;
-        break;
     }
 
     // Create instance
@@ -53,11 +48,12 @@ class AppConfig {
 
     // Log configuration
     if (_config!.enableLogging && logger != null) {
-      logger.info('🚀 App initialized with environment: ${env.value}');
-      logger.debug('📱 App name: ${_config!.fullAppName}');
-      logger.debug('🌐 Base URL: ${_config!.baseUrl}');
-      logger.debug('🔧 Debug mode: ${_config!.enableDebugMode}');
-      logger.debug('📊 Analytics: ${_config!.enableAnalytics}');
+      logger
+        ..info('🚀 App initialized with environment: ${env.value}')
+        ..debug('📱 App name: ${_config!.fullAppName}')
+        ..debug('🌐 Base URL: ${_config!.baseUrl}')
+        ..debug('🔧 Debug mode: ${_config!.enableDebugMode}')
+        ..debug('📊 Analytics: ${_config!.enableAnalytics}');
     }
   }
 
@@ -186,7 +182,7 @@ class AppConfig {
 
   /// Update configuration at runtime (for testing)
   @visibleForTesting
-  static void updateConfig(EnvironmentConfig newConfig) {
+  static set config(EnvironmentConfig newConfig) {
     _config = newConfig;
   }
 

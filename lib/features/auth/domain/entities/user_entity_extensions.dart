@@ -1,4 +1,4 @@
-import 'user_entity.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
 
 /// Extension methods for UserEntity business logic
 extension UserEntityX on UserEntity {
@@ -15,12 +15,10 @@ extension UserEntityX on UserEntity {
   bool hasRole(String role) => roles.contains(role);
 
   /// Check if user has any of the specified roles
-  bool hasAnyRole(List<String> roleList) =>
-      roleList.any((role) => hasRole(role));
+  bool hasAnyRole(List<String> roleList) => roleList.any(hasRole);
 
   /// Check if user has all of the specified roles
-  bool hasAllRoles(List<String> roleList) =>
-      roleList.every((role) => hasRole(role));
+  bool hasAllRoles(List<String> roleList) => roleList.every(hasRole);
 
   /// Check if user has specific permission
   bool hasPermission(String permission) => permissions.containsKey(permission);
@@ -33,5 +31,5 @@ extension UserEntityX on UserEntity {
 
   /// Check if user can perform action based on permissions
   bool canPerform(String action) =>
-      hasPermission(action) && getPermission<bool>(action) == true;
+      hasPermission(action) && (getPermission<bool>(action) ?? false);
 }

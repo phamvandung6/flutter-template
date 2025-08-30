@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/error/failures.dart';
+import 'package:flutter_template/core/error/failures.dart';
 
 part 'base_bloc_state.freezed.dart';
 

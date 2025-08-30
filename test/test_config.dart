@@ -26,15 +26,15 @@ class TestConfig {
 
 /// Test group helper for organizing tests
 class TestGroups {
-  static void runUnitTests(String description, Function() body) {
+  static void runUnitTests(String description, void Function() body) {
     group('Unit Tests - $description', body);
   }
 
-  static void runWidgetTests(String description, Function() body) {
+  static void runWidgetTests(String description, void Function() body) {
     group('Widget Tests - $description', body);
   }
 
-  static void runIntegrationTests(String description, Function() body) {
+  static void runIntegrationTests(String description, void Function() body) {
     group('Integration Tests - $description', body);
   }
 }

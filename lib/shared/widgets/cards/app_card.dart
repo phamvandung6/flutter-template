@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../utils/responsive.dart';
+import 'package:flutter_template/shared/utils/responsive.dart';
 
 /// Card variants for different use cases
 enum AppCardVariant {
@@ -11,20 +10,6 @@ enum AppCardVariant {
 
 /// Reusable card component with consistent styling
 class AppCard extends StatelessWidget {
-  final Widget child;
-  final AppCardVariant variant;
-  final EdgeInsets? padding;
-  final EdgeInsets? margin;
-  final BorderRadius? borderRadius;
-  final Color? backgroundColor;
-  final double? elevation;
-  final VoidCallback? onTap;
-  final String? title;
-  final String? subtitle;
-  final Widget? leading;
-  final Widget? trailing;
-  final bool showDivider;
-
   const AppCard({
     super.key,
     required this.child,
@@ -92,6 +77,19 @@ class AppCard extends StatelessWidget {
     this.showDivider = false,
   })  : variant = AppCardVariant.outlined,
         elevation = 0;
+  final Widget child;
+  final AppCardVariant variant;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
+  final BorderRadius? borderRadius;
+  final Color? backgroundColor;
+  final double? elevation;
+  final VoidCallback? onTap;
+  final String? title;
+  final String? subtitle;
+  final Widget? leading;
+  final Widget? trailing;
+  final bool showDivider;
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +101,9 @@ class AppCard extends StatelessWidget {
     final effectiveMargin = margin ?? context.responsiveMargin;
     final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(16);
 
-    Widget cardContent = _buildCardContent(context);
+    final cardContent = _buildCardContent(context);
 
-    Widget card = _buildCard(
+    var card = _buildCard(
       context,
       cardContent,
       effectivePadding,
@@ -137,7 +135,7 @@ class AppCard extends StatelessWidget {
   Widget _buildCardContent(BuildContext context) {
     final theme = Theme.of(context);
 
-    List<Widget> content = [];
+    final content = <Widget>[];
 
     // Add header if title is provided
     if (title != null) {
@@ -235,7 +233,6 @@ class AppCard extends StatelessWidget {
             borderRadius: effectiveBorderRadius,
             border: Border.all(
               color: colorScheme.outline,
-              width: 1,
             ),
           ),
           child: content,
@@ -246,11 +243,6 @@ class AppCard extends StatelessWidget {
 
 /// Card with built-in loading state
 class AppLoadingCard extends StatelessWidget {
-  final bool isLoading;
-  final Widget child;
-  final Widget? loadingWidget;
-  final String? loadingMessage;
-
   const AppLoadingCard({
     super.key,
     required this.isLoading,
@@ -258,6 +250,10 @@ class AppLoadingCard extends StatelessWidget {
     this.loadingWidget,
     this.loadingMessage,
   });
+  final bool isLoading;
+  final Widget child;
+  final Widget? loadingWidget;
+  final String? loadingMessage;
 
   @override
   Widget build(BuildContext context) {

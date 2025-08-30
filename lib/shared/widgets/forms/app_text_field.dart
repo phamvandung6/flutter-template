@@ -13,29 +13,6 @@ enum AppTextFieldType {
 
 /// Reusable text field with consistent styling and validation
 class AppTextField extends StatefulWidget {
-  final String? label;
-  final String? hint;
-  final String? helperText;
-  final String? errorText;
-  final AppTextFieldType type;
-  final TextEditingController? controller;
-  final String? initialValue;
-  final bool enabled;
-  final bool readOnly;
-  final bool required;
-  final int? maxLines;
-  final int? maxLength;
-  final Widget? prefixIcon;
-  final Widget? suffixIcon;
-  final VoidCallback? onTap;
-  final ValueChanged<String>? onChanged;
-  final ValueChanged<String>? onSubmitted;
-  final FormFieldValidator<String>? validator;
-  final List<TextInputFormatter>? inputFormatters;
-  final TextInputAction? textInputAction;
-  final FocusNode? focusNode;
-  final bool obscureText;
-  final EdgeInsets? contentPadding;
 
   const AppTextField({
     super.key,
@@ -144,6 +121,29 @@ class AppTextField extends StatefulWidget {
     this.contentPadding,
   })  : type = AppTextFieldType.multiline,
         obscureText = false;
+  final String? label;
+  final String? hint;
+  final String? helperText;
+  final String? errorText;
+  final AppTextFieldType type;
+  final TextEditingController? controller;
+  final String? initialValue;
+  final bool enabled;
+  final bool readOnly;
+  final bool required;
+  final int? maxLines;
+  final int? maxLength;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final VoidCallback? onTap;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  final FormFieldValidator<String>? validator;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputAction? textInputAction;
+  final FocusNode? focusNode;
+  final bool obscureText;
+  final EdgeInsets? contentPadding;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -178,7 +178,7 @@ class _AppTextFieldState extends State<AppTextField> {
         if (widget.label != null) ...[
           RichText(
             text: TextSpan(
-              text: widget.label!,
+              text: widget.label,
               style: theme.textTheme.labelLarge?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),

@@ -1,15 +1,14 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/error/failures.dart';
-import '../../../core/utils/logger.dart';
-import '../bloc/base_bloc_state.dart';
-import '../bloc/base_bloc_state_extensions.dart';
+import 'package:flutter_template/core/error/failures.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state_extensions.dart';
 
 /// Base Cubit class for simple state management using single state approach
 abstract class BaseCubit<T> extends Cubit<BaseBlocState<T>> {
-  final AppLogger _logger;
-
   BaseCubit(super.initialState, this._logger);
+  final AppLogger _logger;
 
   /// Helper method to emit loading state safely
   void emitLoading({String? message}) {
@@ -42,8 +41,8 @@ abstract class BaseCubit<T> extends Cubit<BaseBlocState<T>> {
 
   /// Helper method to handle either result from use cases
   Future<void> handleEitherResult<R>(
-    Future<dynamic> either, {
-    Function(R data)? onSuccess,
+    Future<Either<Failure, R>> either, {
+    void Function(R data)? onSuccess,
     String? context,
     bool showLoading = true,
   }) async {
@@ -58,7 +57,7 @@ abstract class BaseCubit<T> extends Cubit<BaseBlocState<T>> {
         (failure) => emitError(failure, context: context),
         (data) {
           if (onSuccess != null) {
-            onSuccess(data as R);
+            onSuccess(data);
           } else {
             // Default behavior: emit success with data if T matches R
             if (data is T) {
@@ -83,7 +82,8 @@ abstract class BaseCubit<T> extends Cubit<BaseBlocState<T>> {
   void onChange(Change<BaseBlocState<T>> change) {
     super.onChange(change);
     _logger.debug(
-        '$runtimeType state changed: ${change.currentState.status} -> ${change.nextState.status}');
+      '$runtimeType state changed: ${change.currentState.status} -> ${change.nextState.status}',
+    );
   }
 
   @override

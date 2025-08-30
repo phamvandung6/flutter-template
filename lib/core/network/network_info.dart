@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:injectable/injectable.dart';
 
-import '../utils/logger.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 
 /// Abstract class for network connectivity information
 abstract class NetworkInfo {
@@ -13,17 +13,18 @@ abstract class NetworkInfo {
 /// Implementation of NetworkInfo using connectivity_plus package
 @LazySingleton(as: NetworkInfo)
 class NetworkInfoImpl implements NetworkInfo {
-  final Connectivity _connectivity;
-  final AppLogger _logger;
 
   NetworkInfoImpl(this._connectivity, this._logger);
+  final Connectivity _connectivity;
+  final AppLogger _logger;
 
   @override
   Future<bool> get isConnected async {
     try {
       final result = await _connectivity.checkConnectivity();
       final connected = _isConnectedResult(result.first);
-      _logger.debug('Network connectivity check: ${connected ? 'Connected' : 'Disconnected'} ($result)');
+      _logger.debug(
+          'Network connectivity check: ${connected ? 'Connected' : 'Disconnected'} ($result)',);
       return connected;
     } catch (e) {
       _logger.error('Error checking network connectivity', e);
@@ -35,7 +36,8 @@ class NetworkInfoImpl implements NetworkInfo {
   Stream<bool> get onConnectivityChanged {
     return _connectivity.onConnectivityChanged.map((results) {
       final connected = _isConnectedResult(results.first);
-      _logger.info('Network connectivity changed: ${connected ? 'Connected' : 'Disconnected'} ($results)');
+      _logger.info(
+          'Network connectivity changed: ${connected ? 'Connected' : 'Disconnected'} ($results)',);
       return connected;
     });
   }
@@ -70,7 +72,7 @@ class NetworkInfoImpl implements NetworkInfo {
     try {
       final results = await _connectivity.checkConnectivity();
       final result = results.first;
-      
+
       switch (result) {
         case ConnectivityResult.wifi:
           // WiFi is generally considered a strong connection

@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Pre-commit hook for Flutter Template
+# This script runs code quality checks before allowing commits
+
+echo "🔍 Running pre-commit checks..."
+
+# Check if make is available
+if ! command -v make &> /dev/null; then
+    echo "❌ Make is not installed. Please install make to run pre-commit checks."
+    exit 1
+fi
+
+# Run code quality checks
+echo "📋 Running code quality checks..."
+if ! make quality-check; then
+    echo "❌ Code quality checks failed. Please fix the issues and try again."
+    echo "💡 Hint: Run 'make quality' to automatically fix some issues."
+    exit 1
+fi
+
+# Run tests
+echo "🧪 Running tests..."
+if ! make test; then
+    echo "❌ Tests failed. Please fix failing tests and try again."
+    exit 1
+fi
+
+echo "✅ All pre-commit checks passed!"
+echo "🚀 Ready to commit!"
+
+exit 0

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 
-import '../../../../shared/widgets/widgets.dart';
+import 'package:flutter_template/shared/widgets/widgets.dart';
 
 /// Error page for handling app errors
 class ErrorPage extends StatelessWidget {
-  final String? message;
-  final String? code;
 
   const ErrorPage({
     super.key,
     this.message,
     this.code,
   });
+  final String? message;
+  final String? code;
 
   @override
   Widget build(BuildContext context) {

@@ -24,7 +24,7 @@ class TestBaseCubit extends BaseCubit<String> {
   Future<void> testHandleEitherSuccess(String data) async {
     await handleEitherResult<String>(
       Future.value(Right(data)),
-      onSuccess: (data) => emitSuccess(data),
+      onSuccess: emitSuccess,
     );
   }
 
@@ -38,7 +38,7 @@ class TestBaseCubit extends BaseCubit<String> {
     await handleEitherResult<String>(
       Future.value(Right(data)),
       showLoading: false,
-      onSuccess: (data) => emitSuccess(data),
+      onSuccess: emitSuccess,
     );
   }
 }
@@ -85,7 +85,7 @@ void main() {
           await cubit.close();
           cubit.testEmitLoading();
         },
-        expect: () => [],
+        expect: () => <BaseBlocState<String>>[],
       );
     });
 

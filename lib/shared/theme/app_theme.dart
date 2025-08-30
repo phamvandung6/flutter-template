@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'colors/app_colors.dart';
-import 'typography/app_typography.dart';
+import 'package:flutter_template/shared/theme/colors/app_colors.dart';
+import 'package:flutter_template/shared/theme/typography/app_typography.dart';
 
 /// Application theme configuration
 class AppTheme {

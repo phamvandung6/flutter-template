@@ -35,9 +35,9 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 class MockSetup {
   static void setupMocks() {
     // Register fallback values for common types
-    registerFallbackValue(const AndroidOptions());
-    registerFallbackValue(const IOSOptions());
-    registerFallbackValue(RequestOptions(path: ''));
+    registerFallbackValue(AndroidOptions.defaultOptions);
+    registerFallbackValue(IOSOptions.defaultOptions);
+    registerFallbackValue(RequestOptions());
     registerFallbackValue(StackTrace.empty);
     registerFallbackValue(ConnectivityResult.wifi);
   }

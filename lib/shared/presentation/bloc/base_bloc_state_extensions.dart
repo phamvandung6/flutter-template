@@ -1,5 +1,5 @@
-import '../../../core/error/failures.dart';
-import 'base_bloc_state.dart';
+import 'package:flutter_template/core/error/failures.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
 
 /// Extensions for BaseBlocState to provide convenient getters and methods
 extension BaseBlocStateX<T> on BaseBlocState<T> {

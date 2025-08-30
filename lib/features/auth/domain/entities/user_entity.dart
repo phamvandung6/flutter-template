@@ -10,12 +10,8 @@ class UserEntity with _$UserEntity {
     required String firstName,
     required String lastName,
     required String email,
-    String? phoneNumber,
+    required bool isVerified, required bool isActive, required DateTime createdAt, required DateTime updatedAt, String? phoneNumber,
     String? avatarUrl,
-    required bool isVerified,
-    required bool isActive,
-    required DateTime createdAt,
-    required DateTime updatedAt,
     @Default([]) List<String> roles,
     @Default({}) Map<String, dynamic> permissions,
   }) = _UserEntity;

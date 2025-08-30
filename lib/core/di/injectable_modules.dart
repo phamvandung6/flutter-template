@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
-import '../config/app_config.dart';
+import 'package:flutter_template/core/config/app_config.dart';
 
 @module
 abstract class InjectableModules {

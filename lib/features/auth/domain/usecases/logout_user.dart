@@ -1,15 +1,15 @@
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/utils/typedef.dart';
-import '../../../../core/utils/usecase.dart';
-import '../repositories/auth_repository.dart';
+import 'package:flutter_template/core/utils/typedef.dart';
+import 'package:flutter_template/core/utils/usecase.dart';
+import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
 
 /// Use case for user logout
 @injectable
 class LogoutUser extends UseCase<void, NoParams> {
-  final AuthRepository _repository;
 
   LogoutUser(this._repository);
+  final AuthRepository _repository;
 
   @override
   ResultVoid call(NoParams params) async {

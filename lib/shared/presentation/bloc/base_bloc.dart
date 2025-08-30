@@ -1,21 +1,22 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../core/error/failures.dart';
-import '../../../core/utils/logger.dart';
-import 'base_bloc_event.dart';
-import 'base_bloc_state.dart';
-import 'base_bloc_state_extensions.dart';
+import 'package:flutter_template/core/error/failures.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state_extensions.dart';
 
 /// Base BLoC class with common functionality using single state approach
 abstract class BaseBloc<Event extends BaseBlocEvent, T>
     extends Bloc<Event, BaseBlocState<T>> {
-  final AppLogger _logger;
-
   BaseBloc(super.initialState, this._logger);
+  final AppLogger _logger;
 
   /// Override this method to handle refresh events
   Future<void> onRefresh(
-      RefreshEvent event, Emitter<BaseBlocState<T>> emit) async {
+    RefreshEvent event,
+    Emitter<BaseBlocState<T>> emit,
+  ) async {
     // Default implementation - override in subclasses
     _logger.debug('Default refresh implementation - override in subclass');
   }
@@ -43,8 +44,11 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
   }
 
   /// Helper method to emit error state
-  void emitError(Emitter<BaseBlocState<T>> emit, Failure failure,
-      {String? context}) {
+  void emitError(
+    Emitter<BaseBlocState<T>> emit,
+    Failure failure, {
+    String? context,
+  }) {
     _logger.error('BLoC error: ${failure.message}', failure);
     emit(state.toError(failure, context: context));
   }
@@ -57,8 +61,8 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
   /// Helper method to handle either result from use cases
   Future<void> handleEitherResult<R>(
     Emitter<BaseBlocState<T>> emit,
-    Future<dynamic> either, {
-    Function(R data)? onSuccess,
+    Future<Either<Failure, R>> either, {
+    void Function(R data)? onSuccess,
     String? context,
     bool showLoading = true,
   }) async {
@@ -71,7 +75,7 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
       (failure) => emitError(emit, failure, context: context),
       (data) {
         if (onSuccess != null) {
-          onSuccess(data as R);
+          onSuccess(data);
         } else {
           // Default behavior: emit success with data if T matches R
           if (data is T) {
@@ -88,14 +92,16 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
   void onChange(Change<BaseBlocState<T>> change) {
     super.onChange(change);
     _logger.debug(
-        '$runtimeType state changed: ${change.currentState.status} -> ${change.nextState.status}');
+      '$runtimeType state changed: ${change.currentState.status} -> ${change.nextState.status}',
+    );
   }
 
   @override
   void onTransition(Transition<Event, BaseBlocState<T>> transition) {
     super.onTransition(transition);
     _logger.debug(
-        '$runtimeType transition: ${transition.event.runtimeType} -> ${transition.nextState.status}');
+      '$runtimeType transition: ${transition.event.runtimeType} -> ${transition.nextState.status}',
+    );
   }
 
   @override

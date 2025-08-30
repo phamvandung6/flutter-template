@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/utils/typedef.dart';
-import '../../../../core/utils/usecase.dart';
-import '../entities/user_entity.dart';
-import '../repositories/auth_repository.dart';
+import 'package:flutter_template/core/utils/typedef.dart';
+import 'package:flutter_template/core/utils/usecase.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
+import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
 
 /// Use case for user registration
 @injectable
 class RegisterUser extends UseCase<UserEntity, RegisterUserParams> {
-  final AuthRepository _repository;
 
   RegisterUser(this._repository);
+  final AuthRepository _repository;
 
   @override
   ResultFuture<UserEntity> call(RegisterUserParams params) async {
@@ -29,13 +29,6 @@ class RegisterUser extends UseCase<UserEntity, RegisterUserParams> {
 
 /// Parameters for register use case
 class RegisterUserParams extends Equatable {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String password;
-  final String passwordConfirmation;
-  final String? phoneNumber;
-  final bool termsAccepted;
 
   const RegisterUserParams({
     required this.firstName,
@@ -46,6 +39,13 @@ class RegisterUserParams extends Equatable {
     this.phoneNumber,
     required this.termsAccepted,
   });
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String password;
+  final String passwordConfirmation;
+  final String? phoneNumber;
+  final bool termsAccepted;
 
   @override
   List<Object?> get props => [

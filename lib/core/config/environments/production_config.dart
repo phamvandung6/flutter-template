@@ -1,4 +1,4 @@
-import '../models/environment_config.dart';
+import 'package:flutter_template/core/config/models/environment_config.dart';
 
 /// Production environment configuration
 class ProductionConfig {
@@ -7,11 +7,7 @@ class ProductionConfig {
     appName: 'Flutter Template',
     appSuffix: '',
     baseUrl: 'https://api.flutter-template.com',
-    apiVersion: 'v1',
     enableLogging: false,
-    enableDebugMode: false,
-    enableAnalytics: true,
-    enableCrashReporting: true,
     connectTimeout: 15000,
     receiveTimeout: 15000,
     sendTimeout: 15000,

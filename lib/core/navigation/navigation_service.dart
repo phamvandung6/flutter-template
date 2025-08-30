@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-
-import '../utils/logger.dart';
-import 'routes/app_routes.dart';
 
 /// Service for handling navigation throughout the app
 @lazySingleton
 class NavigationService {
+  NavigationService(this._logger);
   final AppLogger _logger;
 
   // Global key for accessing navigator without context
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-
-  NavigationService(this._logger);
 
   /// Get current context
   BuildContext? get currentContext => navigatorKey.currentContext;
@@ -93,7 +91,7 @@ class NavigationService {
   /// Navigate back or to fallback route
   void goBackOrTo(String fallbackRoute) {
     if (GoRouter.of(currentContext!).canPop()) {
-      pop();
+      pop<void>();
     } else {
       go(fallbackRoute);
     }
@@ -136,7 +134,7 @@ class NavigationService {
     bool showDragHandle = true,
   }) {
     final context = currentContext;
-    if (context == null) return Future.value(null);
+    if (context == null) return Future.value();
 
     return showModalBottomSheet<T>(
       context: context,
@@ -153,7 +151,7 @@ class NavigationService {
     bool barrierDismissible = true,
   }) {
     final context = currentContext;
-    if (context == null) return Future.value(null);
+    if (context == null) return Future.value();
 
     return showDialog<T>(
       context: context,

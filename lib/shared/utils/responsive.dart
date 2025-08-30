@@ -46,9 +46,9 @@ class Responsive {
     return EdgeInsets.all(
       responsiveValue(
         context,
-        mobile: 16.0,
-        tablet: 24.0,
-        desktop: 32.0,
+        mobile: 16,
+        tablet: 24,
+        desktop: 32,
       ),
     );
   }
@@ -58,9 +58,9 @@ class Responsive {
     return EdgeInsets.all(
       responsiveValue(
         context,
-        mobile: 8.0,
-        tablet: 12.0,
-        desktop: 16.0,
+        mobile: 8,
+        tablet: 12,
+        desktop: 16,
       ),
     );
   }
@@ -69,7 +69,7 @@ class Responsive {
   static double responsiveFontSize(BuildContext context, double baseSize) {
     final multiplier = responsiveValue(
       context,
-      mobile: 1.0,
+      mobile: 1,
       tablet: 1.1,
       desktop: 1.2,
     );
@@ -80,9 +80,9 @@ class Responsive {
   static double responsiveIconSize(BuildContext context) {
     return responsiveValue(
       context,
-      mobile: 24.0,
-      tablet: 28.0,
-      desktop: 32.0,
+      mobile: 24,
+      tablet: 28,
+      desktop: 32,
     );
   }
 

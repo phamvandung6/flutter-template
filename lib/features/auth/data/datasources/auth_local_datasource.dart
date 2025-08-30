@@ -1,8 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/error/exceptions.dart';
-import '../models/user_dto.dart';
+import 'package:flutter_template/core/error/exceptions.dart';
+import 'package:flutter_template/features/auth/data/models/user_dto.dart';
 
 /// Interface for local authentication data storage
 abstract class AuthLocalDataSource {
@@ -40,6 +40,8 @@ abstract class AuthLocalDataSource {
 /// Implementation of AuthLocalDataSource using FlutterSecureStorage
 @LazySingleton(as: AuthLocalDataSource)
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
+
+  AuthLocalDataSourceImpl(this._secureStorage);
   final FlutterSecureStorage _secureStorage;
 
   // Storage keys
@@ -48,14 +50,12 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   static const String _refreshTokenKey = 'refresh_token';
   static const String _deviceIdKey = 'device_id';
 
-  AuthLocalDataSourceImpl(this._secureStorage);
-
   @override
   Future<UserDto?> getCachedUser() async {
     try {
       final userJson = await _secureStorage.read(key: _userKey);
       if (userJson != null) {
-        final Map<String, dynamic> userMap = Map<String, dynamic>.from(
+        final userMap = Map<String, dynamic>.from(
           // Simple JSON decode simulation - in real app use json.decode
           <String, dynamic>{},
         );

@@ -1,4 +1,4 @@
-import '../models/environment_config.dart';
+import 'package:flutter_template/core/config/models/environment_config.dart';
 
 /// Development environment configuration
 class DevelopmentConfig {
@@ -7,14 +7,9 @@ class DevelopmentConfig {
     appName: 'Flutter Template',
     appSuffix: 'Dev',
     baseUrl: 'https://dev-api.flutter-template.com',
-    apiVersion: 'v1',
-    enableLogging: true,
     enableDebugMode: true,
     enableAnalytics: false,
     enableCrashReporting: false,
-    connectTimeout: 30000,
-    receiveTimeout: 30000,
-    sendTimeout: 30000,
     features: {
       // Development-specific features
       'mock_api': true,

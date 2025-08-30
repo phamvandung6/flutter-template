@@ -1,25 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/utils/logger.dart';
-import '../../../../core/utils/usecase.dart';
-import '../../../../shared/presentation/bloc/base_bloc.dart';
-import '../../../../shared/presentation/bloc/base_bloc_event.dart';
-import '../../domain/entities/user_entity.dart';
-import '../../domain/usecases/get_current_user.dart';
-import '../../domain/usecases/login_user.dart';
-import '../../domain/usecases/logout_user.dart';
-import '../../domain/usecases/register_user.dart';
-import 'auth_event.dart';
-import 'auth_state.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/core/utils/usecase.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
+import 'package:flutter_template/features/auth/domain/usecases/get_current_user.dart';
+import 'package:flutter_template/features/auth/domain/usecases/login_user.dart';
+import 'package:flutter_template/features/auth/domain/usecases/logout_user.dart';
+import 'package:flutter_template/features/auth/domain/usecases/register_user.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_event.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_state.dart';
 
 /// BLoC for authentication state management using single state approach
 @injectable
 class AuthBloc extends BaseBloc<AuthEvent, UserEntity> {
-  final LoginUser _loginUser;
-  final RegisterUser _registerUser;
-  final LogoutUser _logoutUser;
-  final GetCurrentUser _getCurrentUser;
 
   AuthBloc(
     this._loginUser,
@@ -34,6 +30,10 @@ class AuthBloc extends BaseBloc<AuthEvent, UserEntity> {
     on<LogoutRequested>(_onLogoutRequested);
     on<CheckAuthStatus>(_onCheckAuthStatus);
   }
+  final LoginUser _loginUser;
+  final RegisterUser _registerUser;
+  final LogoutUser _logoutUser;
+  final GetCurrentUser _getCurrentUser;
 
   /// Handle login requests
   Future<void> _onLoginRequested(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:injectable/injectable.dart';
 
-import '../../../core/utils/logger.dart';
-import '../bloc/base_bloc_state.dart';
-import 'base_cubit.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/cubit/base_cubit.dart';
 
 /// Theme mode options
 enum AppThemeMode {
@@ -14,13 +15,13 @@ enum AppThemeMode {
 
 /// Theme state data
 class AppThemeData {
-  final AppThemeMode mode;
-  final bool isDark;
 
   const AppThemeData({
     required this.mode,
     required this.isDark,
   });
+  final AppThemeMode mode;
+  final bool isDark;
 }
 
 /// Cubit for managing app theme

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/bloc/app_bloc_observer.dart';
-import 'core/config/app_config.dart';
-import 'core/di/injection.dart';
-import 'core/navigation/app_router.dart';
-import 'core/utils/logger.dart';
-import 'features/auth/presentation/bloc/auth_bloc.dart';
-import 'features/auth/presentation/bloc/auth_event.dart';
-import 'shared/presentation/bloc/base_bloc_state.dart';
-import 'shared/presentation/cubit/theme_cubit.dart';
-import 'shared/theme/theme.dart';
+import 'package:flutter_template/core/bloc/app_bloc_observer.dart';
+import 'package:flutter_template/core/config/app_config.dart';
+import 'package:flutter_template/core/di/injection.dart';
+import 'package:flutter_template/core/navigation/app_router.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_event.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/cubit/theme_cubit.dart';
+import 'package:flutter_template/shared/theme/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../models/login_request_dto.dart';
-import '../models/login_response_dto.dart';
-import '../models/register_request_dto.dart';
-import '../models/user_dto.dart';
+import 'package:flutter_template/features/auth/data/models/login_request_dto.dart';
+import 'package:flutter_template/features/auth/data/models/login_response_dto.dart';
+import 'package:flutter_template/features/auth/data/models/register_request_dto.dart';
+import 'package:flutter_template/features/auth/data/models/user_dto.dart';
 
 part 'auth_remote_datasource.g.dart';
 
@@ -60,9 +60,9 @@ abstract class AuthApiClient {
 /// Implementation of AuthRemoteDataSource using AuthApiClient
 @LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-  final AuthApiClient _apiClient;
 
   AuthRemoteDataSourceImpl(this._apiClient);
+  final AuthApiClient _apiClient;
 
   @override
   Future<LoginResponseDto> login(LoginRequestDto request) {

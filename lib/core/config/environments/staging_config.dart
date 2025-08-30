@@ -1,4 +1,4 @@
-import '../models/environment_config.dart';
+import 'package:flutter_template/core/config/models/environment_config.dart';
 
 /// Staging environment configuration
 class StagingConfig {
@@ -7,14 +7,7 @@ class StagingConfig {
     appName: 'Flutter Template',
     appSuffix: 'Staging',
     baseUrl: 'https://staging-api.flutter-template.com',
-    apiVersion: 'v1',
-    enableLogging: true,
     enableDebugMode: true,
-    enableAnalytics: true,
-    enableCrashReporting: true,
-    connectTimeout: 30000,
-    receiveTimeout: 30000,
-    sendTimeout: 30000,
     features: {
       // Staging-specific features
       'mock_api': false,

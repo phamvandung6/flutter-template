@@ -1,5 +1,5 @@
-import '../../../../core/utils/typedef.dart';
-import '../entities/user_entity.dart';
+import 'package:flutter_template/core/utils/typedef.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
 
 /// Repository interface for authentication operations
 /// This defines the contract that the data layer must implement
@@ -19,8 +19,7 @@ abstract class AuthRepository {
     required String email,
     required String password,
     required String passwordConfirmation,
-    String? phoneNumber,
-    required bool termsAccepted,
+    required bool termsAccepted, String? phoneNumber,
   });
 
   /// Refresh authentication token

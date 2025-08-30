@@ -4,20 +4,12 @@ import 'package:logger/logger.dart';
 /// Logger service for application-wide logging with colorful output
 @lazySingleton
 class AppLogger {
-  late final Logger _logger;
-
   AppLogger() {
     _logger = Logger(
-      printer: PrettyPrinter(
-        methodCount: 2,
-        errorMethodCount: 8,
-        lineLength: 120,
-        colors: true,
-        printEmojis: true,
-        dateTimeFormat: DateTimeFormat.none,
-      ),
+      printer: PrettyPrinter(),
     );
   }
+  late final Logger _logger;
 
   void debug(String message) {
     _logger.d(message);

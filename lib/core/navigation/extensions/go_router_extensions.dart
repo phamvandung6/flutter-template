@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 
-import '../routes/app_routes.dart';
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
 
 /// Extensions for GoRouter to provide convenient navigation methods
 extension GoRouterExtension on GoRouter {

@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity_extensions.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_state_extensions.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../features/auth/domain/entities/user_entity_extensions.dart';
-import '../../../features/auth/presentation/bloc/auth_bloc.dart';
-import '../../../features/auth/presentation/bloc/auth_state_extensions.dart';
-import '../../utils/logger.dart';
-import '../routes/app_routes.dart';
 
 /// Guard for protecting authenticated routes
 @injectable
 class AuthGuard {
-  final AppLogger _logger;
-
   AuthGuard(this._logger);
+  final AppLogger _logger;
 
   /// Check if user can access the route
   String? checkAccess(BuildContext context, GoRouterState state) {
     final authBloc = context.read<AuthBloc>();
     final authState = authBloc.state;
 
-    _logger.debug('AuthGuard: Checking access to ${state.fullPath}');
     _logger
-        .debug('AuthGuard: User authenticated: ${authState.isAuthenticated}');
+      ..debug('AuthGuard: Checking access to ${state.fullPath}')
+      ..debug('AuthGuard: User authenticated: ${authState.isAuthenticated}');
 
     // Allow access to public routes
     if (AppRoutes.isPublicRoute(state.fullPath ?? '')) {
@@ -34,7 +32,8 @@ class AuthGuard {
     // Check authentication for protected routes
     if (!authState.isAuthenticated) {
       _logger.info(
-          'AuthGuard: Unauthenticated access attempt to ${state.fullPath}');
+        'AuthGuard: Unauthenticated access attempt to ${state.fullPath}',
+      );
 
       // Store intended route for redirect after login
       final intendedRoute = state.fullPath ?? AppRoutes.home;
@@ -47,7 +46,8 @@ class AuthGuard {
     // Check if user is active
     if (authState.user?.isActive != true) {
       _logger.warning(
-          'AuthGuard: Inactive user attempting access to ${state.fullPath}');
+        'AuthGuard: Inactive user attempting access to ${state.fullPath}',
+      );
       return AppRoutes.error;
     }
 

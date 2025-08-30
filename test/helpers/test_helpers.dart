@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -17,7 +18,6 @@ class TestHelpers {
       theme: theme,
       locale: locale,
       localizationsDelegates: const [],
-      supportedLocales: const [Locale('en', 'US')],
     );
 
     if (providers != null && providers.isNotEmpty) {
@@ -102,12 +102,12 @@ class TestHelpers {
     String? key,
     Type? widgetType,
   }) async {
-    final finder = key != null 
-        ? findByKey(key) 
-        : widgetType != null 
+    final finder = key != null
+        ? findByKey(key)
+        : widgetType != null
             ? find.byType(widgetType)
             : find.byType(TextField);
-    
+
     await tester.enterText(finder, text);
     await pumpAndSettle(tester);
   }
@@ -131,7 +131,7 @@ class TestConstants {
   static const String testUserEmail = 'test@example.com';
   static const String testUserName = 'Test User';
   static const String testDeviceId = 'test_device_id';
-  
+
   static const Duration testTimeout = Duration(seconds: 5);
   static const Duration testDelay = Duration(milliseconds: 100);
 }

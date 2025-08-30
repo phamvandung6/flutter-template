@@ -12,7 +12,6 @@ class AppColors {
   // Light Theme ColorScheme
   static final ColorScheme lightColorScheme = ColorScheme.fromSeed(
     seedColor: primarySeed,
-    brightness: Brightness.light,
   );
 
   // Dark Theme ColorScheme

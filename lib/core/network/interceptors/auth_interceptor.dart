@@ -1,18 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
-import '../../constants/app_constants.dart';
-import '../../utils/logger.dart';
+import 'package:flutter_template/core/constants/app_constants.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 
 /// Interceptor for handling authentication tokens
 class AuthInterceptor extends Interceptor {
+  AuthInterceptor(this._secureStorage, this._logger);
   final FlutterSecureStorage _secureStorage;
   final AppLogger _logger;
 
-  AuthInterceptor(this._secureStorage, this._logger);
-
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
@@ -35,7 +33,10 @@ class AuthInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioException err, ErrorInterceptorHandler handler) async {
+  Future<void> onError(
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
     // Handle 401 Unauthorized - token expired
     if (err.response?.statusCode == 401) {
       _logger.warning('Received 401 - attempting token refresh');
@@ -69,17 +70,17 @@ class AuthInterceptor extends Interceptor {
         return false;
       }
 
-      // TODO: Implement actual token refresh API call
+      // TODO(auth): Implement actual token refresh API call
       // This is a placeholder - replace with actual refresh endpoint
       final dio = Dio();
-      final response = await dio.post(
+      final response = await dio.post<Map<String, dynamic>>(
         '/auth/refresh',
         data: {'refresh_token': refreshToken},
       );
 
-      if (response.statusCode == 200) {
-        final newAccessToken = response.data['access_token'] as String?;
-        final newRefreshToken = response.data['refresh_token'] as String?;
+      if (response.statusCode == 200 && response.data != null) {
+        final newAccessToken = response.data!['access_token'] as String?;
+        final newRefreshToken = response.data!['refresh_token'] as String?;
 
         if (newAccessToken != null) {
           await _secureStorage.write(

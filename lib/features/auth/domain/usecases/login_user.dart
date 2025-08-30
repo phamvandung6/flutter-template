@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/utils/typedef.dart';
-import '../../../../core/utils/usecase.dart';
-import '../entities/user_entity.dart';
-import '../repositories/auth_repository.dart';
+import 'package:flutter_template/core/utils/typedef.dart';
+import 'package:flutter_template/core/utils/usecase.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
+import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
 
 /// Use case for user login
 @injectable
 class LoginUser extends UseCase<UserEntity, LoginUserParams> {
-  final AuthRepository _repository;
 
   LoginUser(this._repository);
+  final AuthRepository _repository;
 
   @override
   ResultFuture<UserEntity> call(LoginUserParams params) async {
@@ -26,10 +26,6 @@ class LoginUser extends UseCase<UserEntity, LoginUserParams> {
 
 /// Parameters for login use case
 class LoginUserParams extends Equatable {
-  final String email;
-  final String password;
-  final bool rememberMe;
-  final String? deviceId;
 
   const LoginUserParams({
     required this.email,
@@ -37,6 +33,10 @@ class LoginUserParams extends Equatable {
     this.rememberMe = false,
     this.deviceId,
   });
+  final String email;
+  final String password;
+  final bool rememberMe;
+  final String? deviceId;
 
   @override
   List<Object?> get props => [email, password, rememberMe, deviceId];

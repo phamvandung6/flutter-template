@@ -1,13 +1,11 @@
 import 'package:dio/dio.dart';
-
-import '../../error/exceptions.dart';
-import '../../utils/logger.dart';
+import 'package:flutter_template/core/error/exceptions.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 
 /// Interceptor for handling and transforming network errors
 class ErrorInterceptor extends Interceptor {
-  final AppLogger _logger;
-
   ErrorInterceptor(this._logger);
+  final AppLogger _logger;
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
@@ -73,11 +71,13 @@ class ErrorInterceptor extends Interceptor {
     final data = response?.data;
 
     // Try to extract error message from response
-    String errorMessage = 'An error occurred';
+    var errorMessage = 'An error occurred';
 
     if (data is Map<String, dynamic>) {
-      errorMessage =
-          data['message'] ?? data['error'] ?? data['detail'] ?? errorMessage;
+      errorMessage = (data['message'] ??
+          data['error'] ??
+          data['detail'] ??
+          errorMessage) as String;
     }
 
     switch (statusCode) {
@@ -98,7 +98,7 @@ class ErrorInterceptor extends Interceptor {
       case 403:
         return const AuthenticationException(
           message:
-              'Access denied. You don\'t have permission to perform this action.',
+              "Access denied. You don't have permission to perform this action.",
           statusCode: 403,
         );
 

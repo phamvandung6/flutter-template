@@ -1,7 +1,7 @@
 # Flutter Template Makefile
 # Provides shortcuts for common development tasks
 
-.PHONY: help build-runner clean get test test-unit test-widget test-coverage-html analyze format lint watch
+.PHONY: help build-runner clean get test test-unit test-widget test-coverage-html analyze format lint quality quality-check pre-commit setup-hooks watch
 
 # Default target
 help: ## Show this help message
@@ -49,6 +49,27 @@ format-fix: ## Format and fix Dart code
 
 lint: ## Run all linting checks
 	flutter analyze && dart format lib/ test/ --set-exit-if-changed
+
+quality: ## Run full code quality checks (analyze + format + imports)
+	@echo "🔍 Running code quality checks..."
+	dart run import_sorter:main
+	dart format lib/ test/ --fix
+	flutter analyze
+
+quality-check: ## Check code quality without fixing
+	@echo "🔍 Checking code quality..."
+	flutter analyze
+	dart format lib/ test/ --set-exit-if-changed
+
+pre-commit: quality-check test ## Run pre-commit checks (quality + tests)
+	@echo "✅ Pre-commit checks passed!"
+
+setup-hooks: ## Setup Git pre-commit hooks
+	@echo "🔧 Setting up Git hooks..."
+	@git config core.hooksPath .githooks
+	@chmod +x .githooks/pre-commit
+	@echo "✅ Git hooks configured successfully!"
+	@echo "💡 Pre-commit hook will now run automatically before each commit"
 
 # Testing
 test: ## Run all tests

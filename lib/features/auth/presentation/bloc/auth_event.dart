@@ -1,4 +1,4 @@
-import '../../../../shared/presentation/bloc/base_bloc_event.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
 
 /// Base class for all authentication events
 abstract class AuthEvent extends BaseBlocEvent {
@@ -7,10 +7,6 @@ abstract class AuthEvent extends BaseBlocEvent {
 
 /// Event triggered when user requests login
 class LoginRequested extends AuthEvent {
-  final String email;
-  final String password;
-  final bool rememberMe;
-  final String? deviceId;
 
   const LoginRequested({
     required this.email,
@@ -18,6 +14,10 @@ class LoginRequested extends AuthEvent {
     this.rememberMe = false,
     this.deviceId,
   });
+  final String email;
+  final String password;
+  final bool rememberMe;
+  final String? deviceId;
 
   @override
   List<Object?> get props => [email, password, rememberMe, deviceId];
@@ -25,13 +25,6 @@ class LoginRequested extends AuthEvent {
 
 /// Event triggered when user requests registration
 class RegisterRequested extends AuthEvent {
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String password;
-  final String passwordConfirmation;
-  final String? phoneNumber;
-  final bool termsAccepted;
 
   const RegisterRequested({
     required this.firstName,
@@ -42,6 +35,13 @@ class RegisterRequested extends AuthEvent {
     this.phoneNumber,
     required this.termsAccepted,
   });
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String password;
+  final String passwordConfirmation;
+  final String? phoneNumber;
+  final bool termsAccepted;
 
   @override
   List<Object?> get props => [
@@ -62,9 +62,9 @@ class LogoutRequested extends AuthEvent {
 
 /// Event triggered to check current authentication status
 class CheckAuthStatus extends AuthEvent {
-  final bool silent;
 
   const CheckAuthStatus({this.silent = false});
+  final bool silent;
 
   @override
   List<Object?> get props => [silent];

@@ -10,12 +10,6 @@ enum LoadingIndicatorType {
 
 /// Reusable loading indicator with different variants
 class AppLoadingIndicator extends StatelessWidget {
-  final LoadingIndicatorType type;
-  final double? size;
-  final Color? color;
-  final String? message;
-  final bool showMessage;
-
   const AppLoadingIndicator({
     super.key,
     this.type = LoadingIndicatorType.circular,
@@ -60,13 +54,18 @@ class AppLoadingIndicator extends StatelessWidget {
     this.message,
     this.showMessage = false,
   }) : type = LoadingIndicatorType.pulse;
+  final LoadingIndicatorType type;
+  final double? size;
+  final Color? color;
+  final String? message;
+  final bool showMessage;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final effectiveColor = color ?? theme.colorScheme.primary;
 
-    Widget indicator = _buildIndicator(context, effectiveColor);
+    final indicator = _buildIndicator(context, effectiveColor);
 
     if (showMessage && message != null) {
       return Column(
@@ -125,13 +124,12 @@ class AppLoadingIndicator extends StatelessWidget {
 
 /// Custom dots loading animation
 class _DotsLoadingIndicator extends StatefulWidget {
-  final Color color;
-  final double size;
-
   const _DotsLoadingIndicator({
     required this.color,
     required this.size,
   });
+  final Color color;
+  final double size;
 
   @override
   State<_DotsLoadingIndicator> createState() => _DotsLoadingIndicatorState();
@@ -151,7 +149,7 @@ class _DotsLoadingIndicatorState extends State<_DotsLoadingIndicator>
     );
 
     _animations = List.generate(3, (index) {
-      return Tween<double>(begin: 0.0, end: 1.0).animate(
+      return Tween<double>(begin: 0, end: 1).animate(
         CurvedAnimation(
           parent: _controller,
           curve: Interval(
@@ -205,13 +203,12 @@ class _DotsLoadingIndicatorState extends State<_DotsLoadingIndicator>
 
 /// Custom pulse loading animation
 class _PulseLoadingIndicator extends StatefulWidget {
-  final Color color;
-  final double size;
-
   const _PulseLoadingIndicator({
     required this.color,
     required this.size,
   });
+  final Color color;
+  final double size;
 
   @override
   State<_PulseLoadingIndicator> createState() => _PulseLoadingIndicatorState();
@@ -230,7 +227,7 @@ class _PulseLoadingIndicatorState extends State<_PulseLoadingIndicator>
       vsync: this,
     );
 
-    _animation = Tween<double>(begin: 0.5, end: 1.0).animate(
+    _animation = Tween<double>(begin: 0.5, end: 1).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 

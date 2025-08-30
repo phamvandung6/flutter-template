@@ -1,12 +1,10 @@
 import 'package:dio/dio.dart';
-
-import '../../utils/logger.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 
 /// Interceptor for logging network requests and responses
 class LoggingInterceptor extends Interceptor {
-  final AppLogger _logger;
-
   LoggingInterceptor(this._logger);
+  final AppLogger _logger;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -15,7 +13,10 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) {
     _logger.debug(_formatResponse(response));
     handler.next(response);
   }
@@ -27,10 +28,10 @@ class LoggingInterceptor extends Interceptor {
   }
 
   String _formatRequest(RequestOptions options) {
-    final buffer = StringBuffer();
-    buffer.writeln('🌐 HTTP REQUEST');
-    buffer.writeln('Method: ${options.method}');
-    buffer.writeln('URL: ${options.uri}');
+    final buffer = StringBuffer()
+      ..writeln('🌐 HTTP REQUEST')
+      ..writeln('Method: ${options.method}')
+      ..writeln('URL: ${options.uri}');
 
     if (options.headers.isNotEmpty) {
       buffer.writeln('Headers:');
@@ -58,11 +59,11 @@ class LoggingInterceptor extends Interceptor {
     return buffer.toString();
   }
 
-  String _formatResponse(Response response) {
-    final buffer = StringBuffer();
-    buffer.writeln('✅ HTTP RESPONSE');
-    buffer.writeln('Status: ${response.statusCode} ${response.statusMessage}');
-    buffer.writeln('URL: ${response.requestOptions.uri}');
+  String _formatResponse(Response<dynamic> response) {
+    final buffer = StringBuffer()
+      ..writeln('✅ HTTP RESPONSE')
+      ..writeln('Status: ${response.statusCode} ${response.statusMessage}')
+      ..writeln('URL: ${response.requestOptions.uri}');
 
     if (response.headers.map.isNotEmpty) {
       buffer.writeln('Headers:');
@@ -79,14 +80,15 @@ class LoggingInterceptor extends Interceptor {
   }
 
   String _formatError(DioException err) {
-    final buffer = StringBuffer();
-    buffer.writeln('❌ HTTP ERROR');
-    buffer.writeln('Type: ${err.type}');
-    buffer.writeln('Message: ${err.message}');
+    final buffer = StringBuffer()
+      ..writeln('❌ HTTP ERROR')
+      ..writeln('Type: ${err.type}')
+      ..writeln('Message: ${err.message}');
 
     if (err.response != null) {
-      buffer.writeln('Status: ${err.response!.statusCode}');
-      buffer.writeln('URL: ${err.requestOptions.uri}');
+      buffer
+        ..writeln('Status: ${err.response!.statusCode}')
+        ..writeln('URL: ${err.requestOptions.uri}');
 
       if (err.response!.data != null) {
         buffer.writeln('Error Body: ${_formatBody(err.response!.data)}');

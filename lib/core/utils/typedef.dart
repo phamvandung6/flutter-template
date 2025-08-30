@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+
 import 'package:flutter_template/core/error/failures.dart';
 
 /// Type definitions for common return types

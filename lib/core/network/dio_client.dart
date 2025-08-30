@@ -3,23 +3,23 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
-import '../constants/app_constants.dart';
-import '../utils/logger.dart';
-import 'interceptors/auth_interceptor.dart';
-import 'interceptors/error_interceptor.dart';
-import 'interceptors/logging_interceptor.dart';
+import 'package:flutter_template/core/constants/app_constants.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/core/network/interceptors/auth_interceptor.dart';
+import 'package:flutter_template/core/network/interceptors/error_interceptor.dart';
+import 'package:flutter_template/core/network/interceptors/logging_interceptor.dart';
 
 @lazySingleton
 class DioClient {
-  late final Dio _dio;
-  final FlutterSecureStorage _secureStorage;
-  final AppLogger _logger;
 
   DioClient(this._secureStorage, this._logger) {
     _dio = Dio();
     _setupBaseOptions();
     _setupInterceptors();
   }
+  late final Dio _dio;
+  final FlutterSecureStorage _secureStorage;
+  final AppLogger _logger;
 
   Dio get dio => _dio;
 
@@ -33,7 +33,6 @@ class DioClient {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      responseType: ResponseType.json,
       followRedirects: true,
     );
   }
@@ -53,10 +52,6 @@ class DioClient {
       store: MemCacheStore(),
       policy: CachePolicy.forceCache,
       maxStale: const Duration(minutes: AppConstants.defaultCacheMaxAge),
-      priority: CachePriority.normal,
-      cipher: null,
-      keyBuilder: CacheOptions.defaultCacheKeyBuilder,
-      allowPostMethod: false,
     );
 
     return DioCacheInterceptor(options: cacheOptions);

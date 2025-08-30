@@ -5,21 +5,6 @@ part 'api_response.g.dart';
 /// Generic API response wrapper for consistent response handling
 @JsonSerializable(genericArgumentFactories: true)
 class ApiResponse<T> {
-  final bool success;
-  final String? message;
-  final T? data;
-
-  @JsonKey(name: 'status_code')
-  final int? statusCode;
-
-  @JsonKey(name: 'error_code')
-  final String? errorCode;
-
-  @JsonKey(name: 'error_details')
-  final Map<String, dynamic>? errorDetails;
-
-  @JsonKey(name: 'meta')
-  final Map<String, dynamic>? meta;
 
   const ApiResponse({
     required this.success,
@@ -36,9 +21,6 @@ class ApiResponse<T> {
     T Function(Object? json) fromJsonT,
   ) =>
       _$ApiResponseFromJson(json, fromJsonT);
-
-  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
-      _$ApiResponseToJson(this, toJsonT);
 
   /// Factory for successful response
   factory ApiResponse.success({
@@ -71,6 +53,24 @@ class ApiResponse<T> {
         statusCode: statusCode,
         meta: meta,
       );
+  final bool success;
+  final String? message;
+  final T? data;
+
+  @JsonKey(name: 'status_code')
+  final int? statusCode;
+
+  @JsonKey(name: 'error_code')
+  final String? errorCode;
+
+  @JsonKey(name: 'error_details')
+  final Map<String, dynamic>? errorDetails;
+
+  @JsonKey(name: 'meta')
+  final Map<String, dynamic>? meta;
+
+  Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
+      _$ApiResponseToJson(this, toJsonT);
 
   /// Check if response has data
   bool get hasData => data != null;
@@ -90,8 +90,6 @@ class ApiResponse<T> {
 /// Paginated response wrapper
 @JsonSerializable(genericArgumentFactories: true)
 class PaginatedResponse<T> {
-  final List<T> data;
-  final PaginationMeta meta;
 
   const PaginatedResponse({
     required this.data,
@@ -103,6 +101,8 @@ class PaginatedResponse<T> {
     T Function(Object? json) fromJsonT,
   ) =>
       _$PaginatedResponseFromJson(json, fromJsonT);
+  final List<T> data;
+  final PaginationMeta meta;
 
   Map<String, dynamic> toJson(Object? Function(T value) toJsonT) =>
       _$PaginatedResponseToJson(this, toJsonT);
@@ -120,6 +120,18 @@ class PaginatedResponse<T> {
 /// Pagination metadata
 @JsonSerializable()
 class PaginationMeta {
+
+  const PaginationMeta({
+    required this.currentPage,
+    required this.perPage,
+    required this.totalPages,
+    required this.totalCount,
+    required this.hasNextPage,
+    required this.hasPreviousPage,
+  });
+
+  factory PaginationMeta.fromJson(Map<String, dynamic> json) =>
+      _$PaginationMetaFromJson(json);
   @JsonKey(name: 'current_page')
   final int currentPage;
 
@@ -137,18 +149,6 @@ class PaginationMeta {
 
   @JsonKey(name: 'has_previous_page')
   final bool hasPreviousPage;
-
-  const PaginationMeta({
-    required this.currentPage,
-    required this.perPage,
-    required this.totalPages,
-    required this.totalCount,
-    required this.hasNextPage,
-    required this.hasPreviousPage,
-  });
-
-  factory PaginationMeta.fromJson(Map<String, dynamic> json) =>
-      _$PaginationMetaFromJson(json);
 
   Map<String, dynamic> toJson() => _$PaginationMetaToJson(this);
 }

@@ -1,25 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/responsive.dart';
+import 'package:flutter_template/shared/utils/responsive.dart';
 
 /// Custom scaffold with responsive layout and common functionality
 class AppScaffold extends StatelessWidget {
-  final Widget body;
-  final String? title;
-  final PreferredSizeWidget? appBar;
-  final Widget? drawer;
-  final Widget? endDrawer;
-  final Widget? floatingActionButton;
-  final FloatingActionButtonLocation? floatingActionButtonLocation;
-  final Widget? bottomNavigationBar;
-  final Widget? bottomSheet;
-  final bool resizeToAvoidBottomInset;
-  final bool extendBody;
-  final bool extendBodyBehindAppBar;
-  final Color? backgroundColor;
-  final bool addSafeArea;
-  final bool addPadding;
-  final EdgeInsets? padding;
 
   const AppScaffold({
     super.key,
@@ -40,11 +24,27 @@ class AppScaffold extends StatelessWidget {
     this.addPadding = true,
     this.padding,
   });
+  final Widget body;
+  final String? title;
+  final PreferredSizeWidget? appBar;
+  final Widget? drawer;
+  final Widget? endDrawer;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final Widget? bottomNavigationBar;
+  final Widget? bottomSheet;
+  final bool resizeToAvoidBottomInset;
+  final bool extendBody;
+  final bool extendBodyBehindAppBar;
+  final Color? backgroundColor;
+  final bool addSafeArea;
+  final bool addPadding;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     // Build effective app bar
-    PreferredSizeWidget? effectiveAppBar = appBar;
+    var effectiveAppBar = appBar;
     if (effectiveAppBar == null && title != null) {
       effectiveAppBar = AppBar(
         title: Text(title!),
@@ -52,7 +52,7 @@ class AppScaffold extends StatelessWidget {
     }
 
     // Build body with optional padding and safe area
-    Widget effectiveBody = body;
+    var effectiveBody = body;
 
     if (addPadding) {
       final effectivePadding = padding ?? context.responsivePadding;
@@ -85,12 +85,6 @@ class AppScaffold extends StatelessWidget {
 
 /// Centered content scaffold for forms and simple layouts
 class AppCenteredScaffold extends StatelessWidget {
-  final Widget child;
-  final String? title;
-  final PreferredSizeWidget? appBar;
-  final double maxWidth;
-  final bool addPadding;
-  final EdgeInsets? padding;
 
   const AppCenteredScaffold({
     super.key,
@@ -101,6 +95,12 @@ class AppCenteredScaffold extends StatelessWidget {
     this.addPadding = true,
     this.padding,
   });
+  final Widget child;
+  final String? title;
+  final PreferredSizeWidget? appBar;
+  final double maxWidth;
+  final bool addPadding;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -127,9 +127,6 @@ class AppCenteredScaffold extends StatelessWidget {
 
 /// Loading scaffold for async operations
 class AppLoadingScaffold extends StatelessWidget {
-  final String? title;
-  final String? message;
-  final Widget? loadingWidget;
 
   const AppLoadingScaffold({
     super.key,
@@ -137,6 +134,9 @@ class AppLoadingScaffold extends StatelessWidget {
     this.message,
     this.loadingWidget,
   });
+  final String? title;
+  final String? message;
+  final Widget? loadingWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -166,10 +166,6 @@ class AppLoadingScaffold extends StatelessWidget {
 
 /// Error scaffold for error states
 class AppErrorScaffold extends StatelessWidget {
-  final String? title;
-  final String message;
-  final VoidCallback? onRetry;
-  final Widget? errorWidget;
 
   const AppErrorScaffold({
     super.key,
@@ -178,6 +174,10 @@ class AppErrorScaffold extends StatelessWidget {
     this.onRetry,
     this.errorWidget,
   });
+  final String? title;
+  final String message;
+  final VoidCallback? onRetry;
+  final Widget? errorWidget;
 
   @override
   Widget build(BuildContext context) {

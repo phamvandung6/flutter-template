@@ -26,19 +26,6 @@ enum AppEnvironment {
 
 /// Configuration model for different environments
 class EnvironmentConfig {
-  final AppEnvironment environment;
-  final String appName;
-  final String appSuffix;
-  final String baseUrl;
-  final String apiVersion;
-  final bool enableLogging;
-  final bool enableDebugMode;
-  final bool enableAnalytics;
-  final bool enableCrashReporting;
-  final int connectTimeout;
-  final int receiveTimeout;
-  final int sendTimeout;
-  final Map<String, dynamic> features;
 
   const EnvironmentConfig({
     required this.environment,
@@ -55,6 +42,19 @@ class EnvironmentConfig {
     this.sendTimeout = 30000,
     this.features = const {},
   });
+  final AppEnvironment environment;
+  final String appName;
+  final String appSuffix;
+  final String baseUrl;
+  final String apiVersion;
+  final bool enableLogging;
+  final bool enableDebugMode;
+  final bool enableAnalytics;
+  final bool enableCrashReporting;
+  final int connectTimeout;
+  final int receiveTimeout;
+  final int sendTimeout;
+  final Map<String, dynamic> features;
 
   /// Get full API URL with version
   String get apiUrl => '$baseUrl/api/$apiVersion';

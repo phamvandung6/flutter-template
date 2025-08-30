@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/widgets/widgets.dart';
+import 'package:flutter_template/shared/widgets/widgets.dart';
 
 /// Splash screen page
 class SplashPage extends StatelessWidget {

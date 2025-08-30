@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../domain/entities/user_entity.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
 
 part 'user_dto.freezed.dart';
 part 'user_dto.g.dart';
@@ -13,12 +13,8 @@ class UserDto with _$UserDto {
     @JsonKey(name: 'first_name') required String firstName,
     @JsonKey(name: 'last_name') required String lastName,
     required String email,
-    @JsonKey(name: 'phone_number') String? phoneNumber,
+    @JsonKey(name: 'is_verified') required bool isVerified, @JsonKey(name: 'is_active') required bool isActive, @JsonKey(name: 'created_at') required DateTime createdAt, @JsonKey(name: 'updated_at') required DateTime updatedAt, @JsonKey(name: 'phone_number') String? phoneNumber,
     @JsonKey(name: 'avatar_url') String? avatarUrl,
-    @JsonKey(name: 'is_verified') required bool isVerified,
-    @JsonKey(name: 'is_active') required bool isActive,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
     @Default([]) List<String> roles,
     @Default({}) Map<String, dynamic> permissions,
   }) = _UserDto;

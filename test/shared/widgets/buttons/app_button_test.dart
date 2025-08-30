@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/shared/widgets/buttons/app_button.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:flutter_template/shared/widgets/buttons/app_button.dart';
 import '../../../helpers/test_helpers.dart';
 
 void main() {
@@ -35,7 +36,6 @@ void main() {
         TestHelpers.createApp(
           child: const AppButton(
             text: buttonText,
-            onPressed: null,
           ),
         ),
       );
@@ -271,7 +271,6 @@ void main() {
           TestHelpers.createApp(
             child: AppButton(
               text: 'Medium',
-              size: AppButtonSize.medium,
               onPressed: () {},
             ),
           ),

@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../features/error/presentation/pages/error_page.dart';
-import '../../features/error/presentation/pages/not_found_page.dart';
-import '../../features/home/presentation/pages/home_page.dart';
-import '../../features/splash/presentation/pages/splash_page.dart';
-import '../../shared/widgets/widgets.dart';
-import '../utils/logger.dart';
-import 'guards/auth_guard.dart';
-import 'navigation_service.dart';
-import 'observers/app_navigation_observer.dart';
-import 'routes/app_routes.dart';
+import 'package:flutter_template/features/error/presentation/pages/error_page.dart';
+import 'package:flutter_template/features/error/presentation/pages/not_found_page.dart';
+import 'package:flutter_template/features/home/presentation/pages/home_page.dart';
+import 'package:flutter_template/features/splash/presentation/pages/splash_page.dart';
+import 'package:flutter_template/shared/widgets/widgets.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/core/navigation/guards/auth_guard.dart';
+import 'package:flutter_template/core/navigation/navigation_service.dart';
+import 'package:flutter_template/core/navigation/observers/app_navigation_observer.dart';
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
 
 /// Application router configuration using GoRouter
 @injectable
 class AppRouter {
-  final AuthGuard _authGuard;
-  final AppNavigationObserver _navigationObserver;
-  final AppLogger _logger;
 
   AppRouter(
     this._authGuard,
     this._navigationObserver,
     this._logger,
   );
+  final AuthGuard _authGuard;
+  final AppNavigationObserver _navigationObserver;
+  final AppLogger _logger;
 
   /// Create and configure GoRouter instance
   GoRouter createRouter(BuildContext context) {
@@ -35,9 +36,7 @@ class AppRouter {
       debugLogDiagnostics: true,
 
       // Global redirect logic
-      redirect: (context, state) {
-        return _authGuard.checkAccess(context, state);
-      },
+      redirect: _authGuard.checkAccess,
 
       // Error handling
       errorBuilder: (context, state) {
@@ -60,19 +59,19 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.login,
           name: 'login',
-          builder: (context, state) => _buildLoginPage(context, state),
+          builder: _buildLoginPage,
         ),
 
         GoRoute(
           path: AppRoutes.register,
           name: 'register',
-          builder: (context, state) => _buildRegisterPage(context, state),
+          builder: _buildRegisterPage,
         ),
 
         GoRoute(
           path: AppRoutes.forgotPassword,
           name: 'forgot-password',
-          builder: (context, state) => _buildForgotPasswordPage(context, state),
+          builder: _buildForgotPasswordPage,
         ),
 
         // Main app routes
@@ -86,19 +85,17 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.profile,
           name: 'profile',
-          builder: (context, state) => _buildProfilePage(context, state),
+          builder: _buildProfilePage,
           routes: [
             GoRoute(
               path: '/edit',
               name: 'edit-profile',
-              builder: (context, state) =>
-                  _buildEditProfilePage(context, state),
+              builder: _buildEditProfilePage,
             ),
             GoRoute(
               path: '/change-password',
               name: 'change-password',
-              builder: (context, state) =>
-                  _buildChangePasswordPage(context, state),
+              builder: _buildChangePasswordPage,
             ),
           ],
         ),
@@ -107,36 +104,32 @@ class AppRouter {
         GoRoute(
           path: AppRoutes.settings,
           name: 'settings',
-          builder: (context, state) => _buildSettingsPage(context, state),
+          builder: _buildSettingsPage,
           routes: [
             GoRoute(
               path: '/theme',
               name: 'settings-theme',
-              builder: (context, state) =>
-                  _buildThemeSettingsPage(context, state),
+              builder: _buildThemeSettingsPage,
             ),
             GoRoute(
               path: '/language',
               name: 'settings-language',
-              builder: (context, state) =>
-                  _buildLanguageSettingsPage(context, state),
+              builder: _buildLanguageSettingsPage,
             ),
             GoRoute(
               path: '/notifications',
               name: 'settings-notifications',
-              builder: (context, state) =>
-                  _buildNotificationSettingsPage(context, state),
+              builder: _buildNotificationSettingsPage,
             ),
             GoRoute(
               path: '/privacy',
               name: 'settings-privacy',
-              builder: (context, state) =>
-                  _buildPrivacySettingsPage(context, state),
+              builder: _buildPrivacySettingsPage,
             ),
             GoRoute(
               path: '/about',
               name: 'settings-about',
-              builder: (context, state) => _buildAboutPage(context, state),
+              builder: _buildAboutPage,
             ),
           ],
         ),
@@ -246,7 +239,7 @@ class AppRouter {
   }
 
   Widget _buildNotificationSettingsPage(
-      BuildContext context, GoRouterState state) {
+      BuildContext context, GoRouterState state,) {
     return _buildPlaceholderPage(
       context,
       'Notification Settings',

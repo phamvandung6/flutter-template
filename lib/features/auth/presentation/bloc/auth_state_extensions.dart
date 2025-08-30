@@ -1,7 +1,7 @@
-import '../../../../shared/presentation/bloc/base_bloc_state_extensions.dart';
-import '../../domain/entities/user_entity.dart';
-import '../../domain/entities/user_entity_extensions.dart';
-import 'auth_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state_extensions.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity_extensions.dart';
+import 'package:flutter_template/features/auth/presentation/bloc/auth_state.dart';
 
 /// Extensions for AuthState to provide authentication-specific functionality
 extension AuthStateX on AuthState {

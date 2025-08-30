@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'package:injectable/injectable.dart';
 
-import '../../utils/logger.dart';
-import '../routes/app_routes.dart';
+import 'package:flutter_template/core/utils/logger.dart';
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
 
 /// Custom navigation observer for logging and analytics
 @injectable
 class AppNavigationObserver extends NavigatorObserver {
-  final AppLogger _logger;
 
   AppNavigationObserver(this._logger);
+  final AppLogger _logger;
 
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
@@ -71,7 +72,7 @@ class AppNavigationObserver extends NavigatorObserver {
 
   @override
   void didStartUserGesture(
-      Route<dynamic> route, Route<dynamic>? previousRoute) {
+      Route<dynamic> route, Route<dynamic>? previousRoute,) {
     super.didStartUserGesture(route, previousRoute);
 
     _logger.debug('Navigation: User gesture started on ${route.settings.name}');
@@ -105,10 +106,6 @@ class AppNavigationObserver extends NavigatorObserver {
 
 /// Custom route information for better tracking
 class AppRouteInformation {
-  final String path;
-  final String name;
-  final Map<String, dynamic> parameters;
-  final DateTime timestamp;
 
   AppRouteInformation({
     required this.path,
@@ -116,6 +113,10 @@ class AppRouteInformation {
     required this.parameters,
     required this.timestamp,
   });
+  final String path;
+  final String name;
+  final Map<String, dynamic> parameters;
+  final DateTime timestamp;
 
   @override
   String toString() {

@@ -1,8 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+
 import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_template/core/utils/typedef.dart';
 import 'package:flutter_template/core/utils/usecase.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 // Test implementation of UseCase
 class TestUseCase extends UseCase<String, TestParams> {
@@ -12,16 +13,16 @@ class TestUseCase extends UseCase<String, TestParams> {
       return Right(params.data);
     } else {
       return const Left(
-          ServerFailure(message: 'Test failure', statusCode: 500));
+          ServerFailure(message: 'Test failure', statusCode: 500),);
     }
   }
 }
 
 // Test implementation of UseCaseWithoutParams
 class TestUseCaseWithoutParams extends UseCaseWithoutParams<String> {
-  final bool shouldSucceed;
 
   TestUseCaseWithoutParams({this.shouldSucceed = true});
+  final bool shouldSucceed;
 
   @override
   ResultFuture<String> call() async {
@@ -29,7 +30,7 @@ class TestUseCaseWithoutParams extends UseCaseWithoutParams<String> {
       return const Right('Success');
     } else {
       return const Left(
-          ServerFailure(message: 'Test failure', statusCode: 500));
+          ServerFailure(message: 'Test failure', statusCode: 500),);
     }
   }
 }
@@ -44,10 +45,10 @@ class TestStreamUseCase extends StreamUseCase<String, TestParams> {
 
 // Test parameters class
 class TestParams {
-  final String data;
-  final bool shouldSucceed;
 
   TestParams({required this.data, this.shouldSucceed = true});
+  final String data;
+  final bool shouldSucceed;
 }
 
 void main() {
@@ -61,7 +62,7 @@ void main() {
     test('should return Right when successful', () async {
       // Arrange
       const testData = 'test data';
-      final params = TestParams(data: testData, shouldSucceed: true);
+      final params = TestParams(data: testData);
 
       // Act
       final result = await useCase(params);
@@ -98,7 +99,7 @@ void main() {
   group('UseCaseWithoutParams', () {
     test('should return Right when successful', () async {
       // Arrange
-      final useCase = TestUseCaseWithoutParams(shouldSucceed: true);
+      final useCase = TestUseCaseWithoutParams();
 
       // Act
       final result = await useCase();

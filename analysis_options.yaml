@@ -5,29 +5,76 @@
 # IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
 # invoked from the command line by running `flutter analyze`.
 
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
-include: package:flutter_lints/flutter.yaml
+# Very Good Analysis - Strict linting rules for high-quality Dart code
+include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
+  exclude:
+    # Exclude generated files from analysis
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/*.gr.dart"
+    - "build/**"
+    - "lib/generated/**"
+  
   errors:
     # Ignore JsonKey warnings in Freezed constructor parameters
     invalid_annotation_target: ignore
+    # Treat missing required parameters as errors
+    missing_required_param: error
+    # Treat missing return types as warnings
+    always_declare_return_types: warning
+
+  language:
+    # Enable strict inference
+    strict-inference: true
+    strict-raw-types: true
 
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # Disable conflicting rules or rules that don't fit our project style
+    
+    # File naming - allow snake_case for test files and generated files
+    file_names: false
+    
+    # Documentation - require public API documentation
+    public_member_api_docs: false  # Too strict for internal projects
+    
+    # Styling preferences - Relaxed
+    prefer_single_quotes: true
+    avoid_print: false  # Allow prints in debug mode
+    lines_longer_than_80_chars: false  # Allow longer lines for modern screens
+    always_put_required_named_parameters_first: false  # Allow flexible parameter ordering
+    
+    # Code organization - Relaxed
+    directives_ordering: false  # Auto-organize imports handles this
+    sort_constructors_first: false  # Allow flexible class organization
+    sort_unnamed_constructors_first: true
+    sort_pub_dependencies: false  # Allow flexible dependency ordering in pubspec.yaml
+    
+    # Catch clauses - Relaxed for development
+    avoid_catches_without_on_clauses: false  # Allow generic catch for simplicity
+    
+    # Switch statements - Allow default cases
+    no_default_cases: false
+    
+    # Type inference - These are analyzer errors, not linter rules
+    # strict_raw_type: controlled by analyzer.language.strict-raw-types
+    # inference_failure_* are analyzer warnings, not linter rules
+    
+    # Performance and best practices - Keep important ones
+    avoid_slow_async_io: true
+    cancel_subscriptions: true
+    close_sinks: true
+    
+    # Null safety - Keep for safety
+    avoid_null_checks_in_equality_operators: true
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    
+    # Flutter specific - Keep for best practices
+    use_build_context_synchronously: true
+    use_key_in_widget_constructors: true
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

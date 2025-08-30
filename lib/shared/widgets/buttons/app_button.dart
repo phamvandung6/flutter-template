@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/responsive.dart';
+import 'package:flutter_template/shared/utils/responsive.dart';
 
 /// Custom button variants for consistent styling
 enum AppButtonVariant {
@@ -20,15 +20,6 @@ enum AppButtonSize {
 
 /// Reusable application button with consistent styling
 class AppButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final AppButtonVariant variant;
-  final AppButtonSize size;
-  final IconData? icon;
-  final bool isLoading;
-  final bool isFullWidth;
-  final EdgeInsets? padding;
-  final BorderRadius? borderRadius;
 
   const AppButton({
     super.key,
@@ -107,6 +98,15 @@ class AppButton extends StatelessWidget {
     this.padding,
     this.borderRadius,
   }) : variant = AppButtonVariant.danger;
+  final String text;
+  final VoidCallback? onPressed;
+  final AppButtonVariant variant;
+  final AppButtonSize size;
+  final IconData? icon;
+  final bool isLoading;
+  final bool isFullWidth;
+  final EdgeInsets? padding;
+  final BorderRadius? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class AppButton extends StatelessWidget {
     final sizeConfig = _getSizeConfig(context);
 
     // Build button content
-    Widget buttonChild = _buildButtonContent(context);
+    var buttonChild = _buildButtonContent(context);
 
     // Wrap with loading indicator if needed
     if (isLoading) {
@@ -141,7 +141,7 @@ class AppButton extends StatelessWidget {
     }
 
     // Build button based on variant
-    Widget button = _buildButton(context, buttonChild, sizeConfig);
+    var button = _buildButton(context, buttonChild, sizeConfig);
 
     // Make full width if needed
     if (isFullWidth) {
@@ -176,7 +176,7 @@ class AppButton extends StatelessWidget {
 
   /// Build button widget based on variant
   Widget _buildButton(
-      BuildContext context, Widget child, _ButtonSizeConfig config) {
+      BuildContext context, Widget child, _ButtonSizeConfig config,) {
     final effectivePadding = padding ?? config.padding;
     final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(12);
 
@@ -250,7 +250,7 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           textStyle: Theme.of(context).textTheme.labelMedium,
           iconSize: context.responsiveValue(
-              mobile: 16.0, tablet: 18.0, desktop: 20.0),
+              mobile: 16, tablet: 18, desktop: 20,),
         );
 
       case AppButtonSize.medium:
@@ -258,7 +258,7 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: Theme.of(context).textTheme.labelLarge,
           iconSize: context.responsiveValue(
-              mobile: 20.0, tablet: 22.0, desktop: 24.0),
+              mobile: 20, tablet: 22, desktop: 24,),
         );
 
       case AppButtonSize.large:
@@ -266,7 +266,7 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           textStyle: Theme.of(context).textTheme.titleMedium,
           iconSize: context.responsiveValue(
-              mobile: 24.0, tablet: 26.0, desktop: 28.0),
+              mobile: 24, tablet: 26, desktop: 28,),
         );
     }
   }
@@ -290,13 +290,13 @@ class AppButton extends StatelessWidget {
 
 /// Internal configuration class for button sizes
 class _ButtonSizeConfig {
-  final EdgeInsets padding;
-  final TextStyle? textStyle;
-  final double iconSize;
 
   const _ButtonSizeConfig({
     required this.padding,
     required this.textStyle,
     required this.iconSize,
   });
+  final EdgeInsets padding;
+  final TextStyle? textStyle;
+  final double iconSize;
 }
