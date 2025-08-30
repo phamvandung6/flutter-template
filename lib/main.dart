@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/bloc/app_bloc_observer.dart';
+import 'core/config/app_config.dart';
 import 'core/di/injection.dart';
 import 'core/navigation/app_router.dart';
+import 'core/utils/logger.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth_event.dart';
 import 'shared/presentation/bloc/base_bloc_state.dart';
@@ -12,6 +14,11 @@ import 'shared/theme/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize app configuration
+  await AppConfig.initialize(
+    logger: AppLogger(),
+  );
 
   // Initialize dependency injection
   await configureDependencies();
@@ -44,8 +51,8 @@ class MyApp extends StatelessWidget {
           final isDark = themeData?.isDark ?? false;
 
           return MaterialApp.router(
-            title: 'Flutter Template',
-            debugShowCheckedModeBanner: false,
+            title: AppConfig.appName,
+            debugShowCheckedModeBanner: AppConfig.isDebugModeEnabled,
 
             // Theme configuration
             theme: AppTheme.lightTheme,

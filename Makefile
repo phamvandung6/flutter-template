@@ -82,8 +82,40 @@ build-web: ## Build for web
 	flutter build web
 
 # Run commands
-run-dev: ## Run app in debug mode
+run-dev: ## Run development flavor
+	flutter run --flavor development --dart-define=FLAVOR=development
+
+run-staging: ## Run staging flavor
+	flutter run --flavor staging --dart-define=FLAVOR=staging
+
+run-prod: ## Run production flavor
+	flutter run --flavor production --dart-define=FLAVOR=production
+
+run-debug: ## Run app in debug mode
 	flutter run --debug
 
 run-release: ## Run app in release mode
 	flutter run --release
+
+# Flavor builds
+build-dev-debug: ## Build development debug
+	flutter build apk --flavor development --debug --dart-define=FLAVOR=development
+
+build-dev-release: ## Build development release
+	flutter build apk --flavor development --release --dart-define=FLAVOR=development
+
+build-staging-release: ## Build staging release
+	flutter build apk --flavor staging --release --dart-define=FLAVOR=staging
+
+build-prod-release: ## Build production release
+	flutter build apk --flavor production --release --dart-define=FLAVOR=production
+	flutter build appbundle --flavor production --release --dart-define=FLAVOR=production
+
+build-all-flavors: ## Build all flavors
+	flutter build apk --flavor development --release --dart-define=FLAVOR=development
+	flutter build apk --flavor staging --release --dart-define=FLAVOR=staging
+	flutter build apk --flavor production --release --dart-define=FLAVOR=production
+	flutter build appbundle --flavor production --release --dart-define=FLAVOR=production
+
+# Environment setup
+setup-development: clean get build-runner run-dev ## Complete development environment setup

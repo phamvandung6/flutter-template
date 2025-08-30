@@ -3,15 +3,20 @@ import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
+import '../config/app_config.dart';
+
 @module
 abstract class InjectableModules {
   // Network Module
   @lazySingleton
   Dio get dio => Dio(
         BaseOptions(
-          baseUrl: 'https://api.example.com/',
-          connectTimeout: const Duration(milliseconds: 5000),
-          receiveTimeout: const Duration(milliseconds: 3000),
+          baseUrl: AppConfig.baseUrl,
+          connectTimeout:
+              Duration(milliseconds: AppConfig.config.connectTimeout),
+          receiveTimeout:
+              Duration(milliseconds: AppConfig.config.receiveTimeout),
+          sendTimeout: Duration(milliseconds: AppConfig.config.sendTimeout),
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
