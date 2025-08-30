@@ -69,6 +69,9 @@ dev_dependencies:
   mocktail: ^1.0.4
   very_good_analysis: ^7.0.0
   import_sorter: ^4.6.0
+  bloc_test: ^10.0.0
+  golden_toolkit: ^0.15.0
+  patrol: ^3.15.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

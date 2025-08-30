@@ -1,7 +1,7 @@
 # Flutter Template Makefile
 # Provides shortcuts for common development tasks
 
-.PHONY: help build-runner clean get test analyze format lint watch
+.PHONY: help build-runner clean get test test-unit test-widget test-coverage-html analyze format lint watch
 
 # Default target
 help: ## Show this help message
@@ -56,6 +56,22 @@ test: ## Run all tests
 
 test-coverage: ## Run tests with coverage
 	flutter test --coverage
+
+test-unit: ## Run unit tests only
+	flutter test test/core/ test/shared/
+
+test-widget: ## Run widget tests only
+	flutter test test/shared/widgets/
+
+test-coverage-html: ## Run tests with coverage and generate HTML report
+	@rm -rf coverage/
+	flutter test --coverage
+	@if command -v genhtml >/dev/null 2>&1; then \
+		genhtml coverage/lcov.info -o coverage/html; \
+		echo "📄 Coverage report generated at coverage/html/index.html"; \
+	else \
+		echo "⚠️  Install lcov to generate HTML reports: sudo apt-get install lcov"; \
+	fi
 
 # Cleaning
 clean: ## Clean build artifacts
