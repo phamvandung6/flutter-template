@@ -13,11 +13,11 @@ enum AppThemeMode {
 }
 
 /// Theme state data
-class ThemeData {
+class AppThemeData {
   final AppThemeMode mode;
   final bool isDark;
 
-  const ThemeData({
+  const AppThemeData({
     required this.mode,
     required this.isDark,
   });
@@ -25,12 +25,12 @@ class ThemeData {
 
 /// Cubit for managing app theme
 @injectable
-class ThemeCubit extends BaseCubit<ThemeData> {
+class ThemeCubit extends BaseCubit<AppThemeData> {
   ThemeCubit(AppLogger logger)
       : super(
-          const BaseBlocState<ThemeData>(
+          const BaseBlocState<AppThemeData>(
             status: BlocStatus.success,
-            data: ThemeData(
+            data: AppThemeData(
               mode: AppThemeMode.system,
               isDark: false,
             ),
@@ -44,7 +44,7 @@ class ThemeCubit extends BaseCubit<ThemeData> {
     final isDark = brightness == Brightness.dark;
 
     emitSuccess(
-      ThemeData(mode: mode, isDark: isDark),
+      AppThemeData(mode: mode, isDark: isDark),
       message: 'Theme changed to ${mode.name}',
     );
   }
