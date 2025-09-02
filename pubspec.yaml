@@ -114,3 +114,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# Import Sorter Configuration
+import_sorter:
+  comments: false
