@@ -10,7 +10,6 @@ abstract class BaseBlocEvent extends Equatable {
 
 /// Refresh event to reload data
 class RefreshEvent extends BaseBlocEvent {
-
   const RefreshEvent({this.forceRefresh = false});
   final bool forceRefresh;
 
@@ -25,7 +24,6 @@ class ResetEvent extends BaseBlocEvent {
 
 /// Load more event for pagination
 class LoadMoreEvent extends BaseBlocEvent {
-
   const LoadMoreEvent({
     required this.page,
     this.limit = 20,
@@ -39,7 +37,6 @@ class LoadMoreEvent extends BaseBlocEvent {
 
 /// Retry event for error recovery
 class RetryEvent extends BaseBlocEvent {
-
   const RetryEvent({this.context});
   final String? context;
 

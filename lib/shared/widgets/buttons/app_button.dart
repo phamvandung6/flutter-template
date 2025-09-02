@@ -20,7 +20,6 @@ enum AppButtonSize {
 
 /// Reusable application button with consistent styling
 class AppButton extends StatelessWidget {
-
   const AppButton({
     super.key,
     required this.text,
@@ -176,7 +175,10 @@ class AppButton extends StatelessWidget {
 
   /// Build button widget based on variant
   Widget _buildButton(
-      BuildContext context, Widget child, _ButtonSizeConfig config,) {
+    BuildContext context,
+    Widget child,
+    _ButtonSizeConfig config,
+  ) {
     final effectivePadding = padding ?? config.padding;
     final effectiveBorderRadius = borderRadius ?? BorderRadius.circular(12);
 
@@ -250,7 +252,10 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           textStyle: Theme.of(context).textTheme.labelMedium,
           iconSize: context.responsiveValue(
-              mobile: 16, tablet: 18, desktop: 20,),
+            mobile: 16,
+            tablet: 18,
+            desktop: 20,
+          ),
         );
 
       case AppButtonSize.medium:
@@ -258,7 +263,10 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           textStyle: Theme.of(context).textTheme.labelLarge,
           iconSize: context.responsiveValue(
-              mobile: 20, tablet: 22, desktop: 24,),
+            mobile: 20,
+            tablet: 22,
+            desktop: 24,
+          ),
         );
 
       case AppButtonSize.large:
@@ -266,7 +274,10 @@ class AppButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
           textStyle: Theme.of(context).textTheme.titleMedium,
           iconSize: context.responsiveValue(
-              mobile: 24, tablet: 26, desktop: 28,),
+            mobile: 24,
+            tablet: 26,
+            desktop: 28,
+          ),
         );
     }
   }
@@ -290,7 +301,6 @@ class AppButton extends StatelessWidget {
 
 /// Internal configuration class for button sizes
 class _ButtonSizeConfig {
-
   const _ButtonSizeConfig({
     required this.padding,
     required this.textStyle,

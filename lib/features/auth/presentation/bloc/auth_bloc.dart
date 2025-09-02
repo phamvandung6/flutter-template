@@ -3,8 +3,6 @@ import 'package:injectable/injectable.dart';
 
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/core/utils/usecase.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
 import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter_template/features/auth/domain/usecases/get_current_user.dart';
 import 'package:flutter_template/features/auth/domain/usecases/login_user.dart';
@@ -12,11 +10,12 @@ import 'package:flutter_template/features/auth/domain/usecases/logout_user.dart'
 import 'package:flutter_template/features/auth/domain/usecases/register_user.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
 
 /// BLoC for authentication state management using single state approach
 @injectable
 class AuthBloc extends BaseBloc<AuthEvent, UserEntity> {
-
   AuthBloc(
     this._loginUser,
     this._registerUser,

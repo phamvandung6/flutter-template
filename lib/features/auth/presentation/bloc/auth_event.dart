@@ -7,7 +7,6 @@ abstract class AuthEvent extends BaseBlocEvent {
 
 /// Event triggered when user requests login
 class LoginRequested extends AuthEvent {
-
   const LoginRequested({
     required this.email,
     required this.password,
@@ -25,7 +24,6 @@ class LoginRequested extends AuthEvent {
 
 /// Event triggered when user requests registration
 class RegisterRequested extends AuthEvent {
-
   const RegisterRequested({
     required this.firstName,
     required this.lastName,
@@ -62,7 +60,6 @@ class LogoutRequested extends AuthEvent {
 
 /// Event triggered to check current authentication status
 class CheckAuthStatus extends AuthEvent {
-
   const CheckAuthStatus({this.silent = false});
   final bool silent;
 

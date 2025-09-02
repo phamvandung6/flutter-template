@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
+
 import 'package:flutter_template/core/navigation/routes/app_routes.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/features/auth/domain/entities/user_entity_extensions.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_state_extensions.dart';
-import 'package:go_router/go_router.dart';
-import 'package:injectable/injectable.dart';
 
 /// Guard for protecting authenticated routes
 @injectable

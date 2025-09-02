@@ -13,7 +13,6 @@ enum AppTextFieldType {
 
 /// Reusable text field with consistent styling and validation
 class AppTextField extends StatefulWidget {
-
   const AppTextField({
     super.key,
     this.label,

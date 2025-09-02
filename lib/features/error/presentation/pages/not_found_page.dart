@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/shared/widgets/widgets.dart';
+
 import 'package:go_router/go_router.dart';
+
+import 'package:flutter_template/shared/widgets/widgets.dart';
 
 /// 404 Not Found page
 class NotFoundPage extends StatelessWidget {

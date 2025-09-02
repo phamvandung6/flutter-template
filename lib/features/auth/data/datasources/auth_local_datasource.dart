@@ -40,7 +40,6 @@ abstract class AuthLocalDataSource {
 /// Implementation of AuthLocalDataSource using FlutterSecureStorage
 @LazySingleton(as: AuthLocalDataSource)
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
-
   AuthLocalDataSourceImpl(this._secureStorage);
   final FlutterSecureStorage _secureStorage;
 

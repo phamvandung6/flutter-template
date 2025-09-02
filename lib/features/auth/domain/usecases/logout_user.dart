@@ -7,7 +7,6 @@ import 'package:flutter_template/features/auth/domain/repositories/auth_reposito
 /// Use case for user logout
 @injectable
 class LogoutUser extends UseCase<void, NoParams> {
-
   LogoutUser(this._repository);
   final AuthRepository _repository;
 

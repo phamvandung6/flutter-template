@@ -19,7 +19,8 @@ abstract class AuthRepository {
     required String email,
     required String password,
     required String passwordConfirmation,
-    required bool termsAccepted, String? phoneNumber,
+    required bool termsAccepted,
+    String? phoneNumber,
   });
 
   /// Refresh authentication token

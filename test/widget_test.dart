@@ -1,9 +1,9 @@
 // Main app widget test
 // This is a basic smoke test to ensure the app builds and runs correctly
 
-import 'package:flutter_template/main.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:flutter_template/main.dart';
 import 'test_config.dart';
 
 void main() {

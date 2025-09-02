@@ -3,21 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:flutter_template/core/navigation/guards/auth_guard.dart';
+import 'package:flutter_template/core/navigation/navigation_service.dart';
+import 'package:flutter_template/core/navigation/observers/app_navigation_observer.dart';
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/features/error/presentation/pages/error_page.dart';
 import 'package:flutter_template/features/error/presentation/pages/not_found_page.dart';
 import 'package:flutter_template/features/home/presentation/pages/home_page.dart';
 import 'package:flutter_template/features/splash/presentation/pages/splash_page.dart';
 import 'package:flutter_template/shared/widgets/widgets.dart';
-import 'package:flutter_template/core/utils/logger.dart';
-import 'package:flutter_template/core/navigation/guards/auth_guard.dart';
-import 'package:flutter_template/core/navigation/navigation_service.dart';
-import 'package:flutter_template/core/navigation/observers/app_navigation_observer.dart';
-import 'package:flutter_template/core/navigation/routes/app_routes.dart';
 
 /// Application router configuration using GoRouter
 @injectable
 class AppRouter {
-
   AppRouter(
     this._authGuard,
     this._navigationObserver,
@@ -239,7 +238,9 @@ class AppRouter {
   }
 
   Widget _buildNotificationSettingsPage(
-      BuildContext context, GoRouterState state,) {
+    BuildContext context,
+    GoRouterState state,
+  ) {
     return _buildPlaceholderPage(
       context,
       'Notification Settings',

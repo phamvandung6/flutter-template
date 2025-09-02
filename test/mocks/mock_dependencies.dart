@@ -1,13 +1,14 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mocktail/mocktail.dart';
+
 import 'package:flutter_template/core/navigation/navigation_service.dart';
 import 'package:flutter_template/core/network/network_info.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_template/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
-import 'package:mocktail/mocktail.dart';
 
 /// Mock classes for testing dependencies
 

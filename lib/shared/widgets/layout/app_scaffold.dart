@@ -4,7 +4,6 @@ import 'package:flutter_template/shared/utils/responsive.dart';
 
 /// Custom scaffold with responsive layout and common functionality
 class AppScaffold extends StatelessWidget {
-
   const AppScaffold({
     super.key,
     required this.body,
@@ -85,7 +84,6 @@ class AppScaffold extends StatelessWidget {
 
 /// Centered content scaffold for forms and simple layouts
 class AppCenteredScaffold extends StatelessWidget {
-
   const AppCenteredScaffold({
     super.key,
     required this.child,
@@ -127,7 +125,6 @@ class AppCenteredScaffold extends StatelessWidget {
 
 /// Loading scaffold for async operations
 class AppLoadingScaffold extends StatelessWidget {
-
   const AppLoadingScaffold({
     super.key,
     this.title,
@@ -166,7 +163,6 @@ class AppLoadingScaffold extends StatelessWidget {
 
 /// Error scaffold for error states
 class AppErrorScaffold extends StatelessWidget {
-
   const AppErrorScaffold({
     super.key,
     this.title,

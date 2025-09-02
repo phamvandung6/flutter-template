@@ -8,7 +8,6 @@ import 'package:flutter_template/features/auth/domain/repositories/auth_reposito
 /// Use case for getting current authenticated user
 @injectable
 class GetCurrentUser extends UseCase<UserEntity, NoParams> {
-
   GetCurrentUser(this._repository);
   final AuthRepository _repository;
 

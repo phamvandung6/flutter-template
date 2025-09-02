@@ -1,10 +1,12 @@
 import 'package:flutter/foundation.dart';
+
+import 'package:injectable/injectable.dart';
+
 import 'package:flutter_template/core/config/environments/development_config.dart';
 import 'package:flutter_template/core/config/environments/production_config.dart';
 import 'package:flutter_template/core/config/environments/staging_config.dart';
 import 'package:flutter_template/core/config/models/environment_config.dart';
 import 'package:flutter_template/core/utils/logger.dart';
-import 'package:injectable/injectable.dart';
 
 /// Global app configuration manager
 @lazySingleton

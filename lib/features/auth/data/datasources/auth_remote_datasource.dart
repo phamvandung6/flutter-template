@@ -60,7 +60,6 @@ abstract class AuthApiClient {
 /// Implementation of AuthRemoteDataSource using AuthApiClient
 @LazySingleton(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
-
   AuthRemoteDataSourceImpl(this._apiClient);
   final AuthApiClient _apiClient;
 

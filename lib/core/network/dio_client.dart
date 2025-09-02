@@ -4,14 +4,13 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:flutter_template/core/constants/app_constants.dart';
-import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/core/network/interceptors/auth_interceptor.dart';
 import 'package:flutter_template/core/network/interceptors/error_interceptor.dart';
 import 'package:flutter_template/core/network/interceptors/logging_interceptor.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 
 @lazySingleton
 class DioClient {
-
   DioClient(this._secureStorage, this._logger) {
     _dio = Dio();
     _setupBaseOptions();

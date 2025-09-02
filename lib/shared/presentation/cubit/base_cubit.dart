@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';

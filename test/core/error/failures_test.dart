@@ -1,5 +1,6 @@
-import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'package:flutter_template/core/error/failures.dart';
 
 void main() {
   group('Failure', () {

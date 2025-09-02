@@ -6,7 +6,6 @@ import 'package:flutter_template/shared/widgets/widgets.dart';
 
 /// Error page for handling app errors
 class ErrorPage extends StatelessWidget {
-
   const ErrorPage({
     super.key,
     this.message,

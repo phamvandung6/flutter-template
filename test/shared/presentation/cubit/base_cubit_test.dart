@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_template/core/error/failures.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
-import 'package:flutter_template/shared/presentation/cubit/base_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import 'package:flutter_template/core/error/failures.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/cubit/base_cubit.dart';
 import '../../../mocks/mock_dependencies.dart';
 
 // Test implementation of BaseCubit

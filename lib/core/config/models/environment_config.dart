@@ -26,7 +26,6 @@ enum AppEnvironment {
 
 /// Configuration model for different environments
 class EnvironmentConfig {
-
   const EnvironmentConfig({
     required this.environment,
     required this.appName,
@@ -42,6 +41,7 @@ class EnvironmentConfig {
     this.sendTimeout = 30000,
     this.features = const {},
   });
+
   final AppEnvironment environment;
   final String appName;
   final String appSuffix;

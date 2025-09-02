@@ -13,14 +13,14 @@ class TestUseCase extends UseCase<String, TestParams> {
       return Right(params.data);
     } else {
       return const Left(
-          ServerFailure(message: 'Test failure', statusCode: 500),);
+        ServerFailure(message: 'Test failure', statusCode: 500),
+      );
     }
   }
 }
 
 // Test implementation of UseCaseWithoutParams
 class TestUseCaseWithoutParams extends UseCaseWithoutParams<String> {
-
   TestUseCaseWithoutParams({this.shouldSucceed = true});
   final bool shouldSucceed;
 
@@ -30,7 +30,8 @@ class TestUseCaseWithoutParams extends UseCaseWithoutParams<String> {
       return const Right('Success');
     } else {
       return const Left(
-          ServerFailure(message: 'Test failure', statusCode: 500),);
+        ServerFailure(message: 'Test failure', statusCode: 500),
+      );
     }
   }
 }
@@ -45,7 +46,6 @@ class TestStreamUseCase extends StreamUseCase<String, TestParams> {
 
 // Test parameters class
 class TestParams {
-
   TestParams({required this.data, this.shouldSucceed = true});
   final String data;
   final bool shouldSucceed;

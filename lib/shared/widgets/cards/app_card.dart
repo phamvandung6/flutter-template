@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_template/shared/utils/responsive.dart';
 
 /// Card variants for different use cases

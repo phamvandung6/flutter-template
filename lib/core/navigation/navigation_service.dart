@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/core/navigation/routes/app_routes.dart';
-import 'package:flutter_template/core/utils/logger.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
+
+import 'package:flutter_template/core/navigation/routes/app_routes.dart';
+import 'package:flutter_template/core/utils/logger.dart';
 
 /// Service for handling navigation throughout the app
 @lazySingleton

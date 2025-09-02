@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+
 import 'package:flutter_template/core/error/exceptions.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 

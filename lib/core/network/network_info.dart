@@ -13,7 +13,6 @@ abstract class NetworkInfo {
 /// Implementation of NetworkInfo using connectivity_plus package
 @LazySingleton(as: NetworkInfo)
 class NetworkInfoImpl implements NetworkInfo {
-
   NetworkInfoImpl(this._connectivity, this._logger);
   final Connectivity _connectivity;
   final AppLogger _logger;
@@ -24,7 +23,8 @@ class NetworkInfoImpl implements NetworkInfo {
       final result = await _connectivity.checkConnectivity();
       final connected = _isConnectedResult(result.first);
       _logger.debug(
-          'Network connectivity check: ${connected ? 'Connected' : 'Disconnected'} ($result)',);
+        'Network connectivity check: ${connected ? 'Connected' : 'Disconnected'} ($result)',
+      );
       return connected;
     } catch (e) {
       _logger.error('Error checking network connectivity', e);
@@ -37,7 +37,8 @@ class NetworkInfoImpl implements NetworkInfo {
     return _connectivity.onConnectivityChanged.map((results) {
       final connected = _isConnectedResult(results.first);
       _logger.info(
-          'Network connectivity changed: ${connected ? 'Connected' : 'Disconnected'} ($results)',);
+        'Network connectivity changed: ${connected ? 'Connected' : 'Disconnected'} ($results)',
+      );
       return connected;
     });
   }

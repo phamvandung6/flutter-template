@@ -15,7 +15,6 @@ enum AppThemeMode {
 
 /// Theme state data
 class AppThemeData {
-
   const AppThemeData({
     required this.mode,
     required this.isDark,

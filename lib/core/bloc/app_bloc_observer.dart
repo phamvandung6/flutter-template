@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/core/utils/logger.dart';
 import 'package:injectable/injectable.dart';
+
+import 'package:flutter_template/core/utils/logger.dart';
 
 /// Global BLoC observer for logging and error tracking
 @injectable

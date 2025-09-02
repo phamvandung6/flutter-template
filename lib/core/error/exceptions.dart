@@ -1,6 +1,5 @@
 /// Base class for all exceptions in the application
 abstract class AppException implements Exception {
-
   const AppException({
     required this.message,
     this.statusCode,

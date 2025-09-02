@@ -1,5 +1,5 @@
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
 import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
 
 /// Type alias for AuthState using single state approach
 typedef AuthState = BaseBlocState<UserEntity>;

@@ -6,18 +6,17 @@ import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_template/core/network/network_info.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/core/utils/typedef.dart';
-import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
-import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
 import 'package:flutter_template/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:flutter_template/features/auth/data/datasources/auth_remote_datasource.dart';
 import 'package:flutter_template/features/auth/data/models/login_request_dto.dart';
 import 'package:flutter_template/features/auth/data/models/register_request_dto.dart';
 import 'package:flutter_template/features/auth/data/models/user_dto.dart';
+import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
+import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
 
 /// Implementation of AuthRepository following Clean Architecture principles
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
-
   AuthRepositoryImpl(
     this._remoteDataSource,
     this._localDataSource,
@@ -39,10 +38,12 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       // Check network connectivity
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Attempting login for email: $email');
@@ -72,27 +73,35 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(response.user.toEntity());
     } on ServerException catch (e) {
       _logger.error('Server error during login', e);
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ServerFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on NetworkException catch (e) {
       _logger.error('Network error during login', e);
-      return Left(NetworkFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        NetworkFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on CacheException catch (e) {
       _logger.error('Cache error during login', e);
-      return Left(CacheFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        CacheFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error during login', e);
-      return const Left(GeneralFailure(
-        message: 'An unexpected error occurred during login',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'An unexpected error occurred during login',
+        ),
+      );
     }
   }
 
@@ -103,14 +112,17 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
     required String passwordConfirmation,
-    required bool termsAccepted, String? phoneNumber,
+    required bool termsAccepted,
+    String? phoneNumber,
   }) async {
     try {
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Attempting registration for email: $email');
@@ -135,27 +147,35 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(userDto.toEntity());
     } on ServerException catch (e) {
       _logger.error('Server error during registration', e);
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ServerFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on ValidationException catch (e) {
       _logger.error('Validation error during registration', e);
-      return Left(ValidationFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ValidationFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on NetworkException catch (e) {
       _logger.error('Network error during registration', e);
-      return Left(NetworkFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        NetworkFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error during registration', e);
-      return const Left(GeneralFailure(
-        message: 'An unexpected error occurred during registration',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'An unexpected error occurred during registration',
+        ),
+      );
     }
   }
 
@@ -165,16 +185,20 @@ class AuthRepositoryImpl implements AuthRepository {
       final refreshToken = await _localDataSource.getRefreshToken();
 
       if (refreshToken == null) {
-        return const Left(AuthenticationFailure(
-          message: 'No refresh token available',
-        ),);
+        return const Left(
+          AuthenticationFailure(
+            message: 'No refresh token available',
+          ),
+        );
       }
 
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Refreshing authentication token');
@@ -194,21 +218,27 @@ class AuthRepositoryImpl implements AuthRepository {
       _logger.error('Authentication error during token refresh', e);
       // Clear invalid tokens
       await _localDataSource.clearAuthData();
-      return Left(AuthenticationFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        AuthenticationFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on NetworkException catch (e) {
       _logger.error('Network error during token refresh', e);
-      return Left(NetworkFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        NetworkFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error during token refresh', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to refresh authentication token',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to refresh authentication token',
+        ),
+      );
     }
   }
 
@@ -233,9 +263,11 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } catch (e) {
       _logger.error('Error during logout', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to logout properly',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to logout properly',
+        ),
+      );
     }
   }
 
@@ -263,27 +295,35 @@ class AuthRepositoryImpl implements AuthRepository {
       }
 
       // No cache and no network
-      return const Left(CacheFailure(
-        message: 'No user data available offline',
-      ),);
+      return const Left(
+        CacheFailure(
+          message: 'No user data available offline',
+        ),
+      );
     } on AuthenticationException catch (e) {
       _logger.error('Authentication error getting current user', e);
       await _localDataSource.clearAuthData();
-      return Left(AuthenticationFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        AuthenticationFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on NetworkException catch (e) {
       _logger.error('Network error getting current user', e);
-      return Left(NetworkFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        NetworkFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error getting current user', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to get current user',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to get current user',
+        ),
+      );
     }
   }
 
@@ -296,10 +336,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Updating user profile');
@@ -319,21 +361,27 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(updatedUser.toEntity());
     } on ServerException catch (e) {
       _logger.error('Server error updating profile', e);
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ServerFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on ValidationException catch (e) {
       _logger.error('Validation error updating profile', e);
-      return Left(ValidationFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ValidationFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error updating profile', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to update profile',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to update profile',
+        ),
+      );
     }
   }
 
@@ -345,10 +393,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Changing user password');
@@ -365,21 +415,27 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } on ServerException catch (e) {
       _logger.error('Server error changing password', e);
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ServerFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } on ValidationException catch (e) {
       _logger.error('Validation error changing password', e);
-      return Left(ValidationFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ValidationFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error changing password', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to change password',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to change password',
+        ),
+      );
     }
   }
 
@@ -387,10 +443,12 @@ class AuthRepositoryImpl implements AuthRepository {
   ResultVoid forgotPassword(String email) async {
     try {
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Requesting password reset for email: $email');
@@ -401,15 +459,19 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } on ServerException catch (e) {
       _logger.error('Server error requesting password reset', e);
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ServerFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error requesting password reset', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to request password reset',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to request password reset',
+        ),
+      );
     }
   }
 
@@ -420,10 +482,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       if (!await _networkInfo.isConnected) {
-        return const Left(NetworkFailure(
-          message: 'No internet connection',
-          statusCode: 0,
-        ),);
+        return const Left(
+          NetworkFailure(
+            message: 'No internet connection',
+            statusCode: 0,
+          ),
+        );
       }
 
       _logger.info('Resetting password with token');
@@ -434,15 +498,19 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } on ServerException catch (e) {
       _logger.error('Server error resetting password', e);
-      return Left(ServerFailure(
-        message: e.message,
-        statusCode: e.statusCode,
-      ),);
+      return Left(
+        ServerFailure(
+          message: e.message,
+          statusCode: e.statusCode,
+        ),
+      );
     } catch (e) {
       _logger.error('Unexpected error resetting password', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to reset password',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to reset password',
+        ),
+      );
     }
   }
 
@@ -476,9 +544,11 @@ class AuthRepositoryImpl implements AuthRepository {
       return const Right(null);
     } catch (e) {
       _logger.error('Error clearing authentication data', e);
-      return const Left(GeneralFailure(
-        message: 'Failed to clear authentication data',
-      ),);
+      return const Left(
+        GeneralFailure(
+          message: 'Failed to clear authentication data',
+        ),
+      );
     }
   }
 }

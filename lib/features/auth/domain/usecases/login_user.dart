@@ -9,7 +9,6 @@ import 'package:flutter_template/features/auth/domain/repositories/auth_reposito
 /// Use case for user login
 @injectable
 class LoginUser extends UseCase<UserEntity, LoginUserParams> {
-
   LoginUser(this._repository);
   final AuthRepository _repository;
 
@@ -26,7 +25,6 @@ class LoginUser extends UseCase<UserEntity, LoginUserParams> {
 
 /// Parameters for login use case
 class LoginUserParams extends Equatable {
-
   const LoginUserParams({
     required this.email,
     required this.password,
