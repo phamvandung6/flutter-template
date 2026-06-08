@@ -79,3 +79,6 @@ node_modules/
 
 # FVM Version Cache
 .fvm/
+
+# Claude Code local-only overrides
+.claude/settings.local.json

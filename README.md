@@ -33,26 +33,34 @@ make run-prod
 
 ```text
 lib/
-├── core/                 # Core functionality
-│   ├── bloc/             # Global BLoC observers
-│   ├── config/           # App configuration and environments
-│   ├── di/               # Dependency injection
-│   ├── error/            # Error handling
-│   ├── navigation/       # Routing and navigation
-│   ├── network/          # HTTP client and API
-│   └── utils/            # Utilities and helpers
-├── features/             # Feature modules
-│   ├── auth/             # Authentication
-│   ├── home/             # Home screen
-│   ├── splash/           # Splash screen
-│   └── error/            # Error pages
-├── shared/               # Shared components
-│   ├── presentation/     # Base BLoC/Cubit classes
-│   ├── theme/            # Theme system
-│   ├── utils/            # Shared utilities
-│   └── widgets/          # Reusable UI components
-└── main.dart             # App entry point
+|-- core/                 # Core functionality
+|   |-- bloc/             # Global BLoC observers
+|   |-- config/           # App configuration and environments
+|   |-- di/               # Dependency injection
+|   |-- error/            # Error handling
+|   |-- navigation/       # Routing and navigation
+|   |-- network/          # HTTP client and API
+|   `-- utils/            # Utilities and helpers
+|-- features/             # Feature modules
+|   |-- auth/             # Authentication
+|   |-- home/             # Home screen
+|   |-- splash/           # Splash screen
+|   `-- error/            # Error pages
+|-- shared/               # Shared components
+|   |-- presentation/     # Base BLoC/Cubit classes
+|   |-- theme/            # Theme system
+|   |-- utils/            # Shared utilities
+|   `-- widgets/          # Reusable UI components
+`-- main.dart             # App entry point
 ```
+
+## Agent Context
+
+This repository includes shared agent instructions:
+
+- `AGENTS.md`: primary instructions for Codex and agentic coding tools.
+- `CLAUDE.md`: Claude Code entry point; imports `AGENTS.md`.
+- `docs/agents/`: architecture, memory, skills, and agent handbook.
 
 ## Toolchain
 
