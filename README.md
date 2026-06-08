@@ -221,6 +221,20 @@ with `use...`.
 Optional, add only when needed:
 
 - `flutter_hooks`: reusable local widget lifecycle helpers
+- `package_info_plus`: app version/build metadata for settings, diagnostics, or
+  support screens
+- `formz`: Cubit/BLoC-friendly form validation for real forms
+- `bloc_concurrency`: event transformers for search, submit, upload, or sync
+  flows
+- `hydrated_bloc`: non-sensitive Cubit/BLoC state persistence
+- `go_router_builder`: typed routes when navigation params grow
+- `flutter_gen_runner`: typed asset/font access when asset usage grows
+- `envied`: generated build-time environment constants when runtime config is
+  not enough
+- `sentry_flutter`: production crash/error reporting when a Sentry project is
+  configured
+- `talker_flutter` and related Talker integrations: richer debug logging when
+  the built-in logger is not enough
 
 ## Environment Setup
 

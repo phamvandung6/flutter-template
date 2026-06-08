@@ -95,6 +95,8 @@ make test
 - Prefer existing packages already in `pubspec.yaml`.
 - `flutter_hooks` is optional; add it only for concrete UI lifecycle needs such
   as controllers, local animations, or reusable debounced input helpers.
+- Other optional packages are cataloged in `docs/agents/architecture.md`; do not
+  add them until a real feature justifies the dependency.
 - After dependency changes, run `fvm flutter pub get`.
 - After generator input changes, run `fvm dart run build_runner build`.
 - Branding generators use example configs in `tool/branding/`; run them only

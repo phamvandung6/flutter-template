@@ -43,6 +43,8 @@ sessions. It is not a scratchpad and must not contain secrets.
   replacement for Cubit/BLoC feature state.
 - `flutter_native_splash` and `flutter_launcher_icons` are included as dev tools,
   but generator configs stay as examples until real brand assets exist.
+- Optional packages are documented in `docs/agents/architecture.md`; do not add
+  them until a concrete feature needs them.
 - Keep generated files out of git to reduce template noise.
 
 ## Do Not Store Here

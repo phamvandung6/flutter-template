@@ -85,6 +85,23 @@ UI event
 - Do not use hooks for domain rules, API screen state, auth/session state,
   pagination, upload, checkout, sync, or other feature workflows.
 
+## Optional Package Catalog
+
+Do not add these packages by default. Add them only when the feature need is
+concrete and the architecture impact is understood.
+
+| Package | Add when |
+| --- | --- |
+| package_info_plus | Settings, diagnostics, or support UI needs app version/build metadata. |
+| formz | Real forms need typed validation with Cubit/BLoC. |
+| bloc_concurrency | Bloc events need debounce, droppable, restartable, or sequential handling. |
+| hydrated_bloc | Non-sensitive Cubit/BLoC state should persist across app restarts. |
+| go_router_builder | Routes and path/query params become hard to maintain as strings. |
+| flutter_gen_runner | Asset/font usage grows enough that string paths become risky. |
+| envied | Build-time environment constants are needed and secret handling is reviewed. |
+| sentry_flutter | Production crash/error reporting is configured for the app. |
+| talker_flutter | Debug logging needs an in-app console or richer Dio/BLoC integrations. |
+
 ## Routing
 
 - `AppRouter` owns route registration.

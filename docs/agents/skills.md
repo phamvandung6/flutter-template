@@ -37,6 +37,9 @@ the smallest relevant skill set before editing.
 - Do not use hooks as a replacement for Cubit/BLoC feature state.
 - Use `flutter_native_splash` and `flutter_launcher_icons` only after real brand
   assets are available.
+- Treat `package_info_plus`, `formz`, `bloc_concurrency`, `hydrated_bloc`,
+  `go_router_builder`, `flutter_gen_runner`, `envied`, `sentry_flutter`, and
+  `talker_flutter` as optional feature-driven packages, not boilerplate defaults.
 - Add tests near the behavior being changed.
 
 ## Memory Workflow
