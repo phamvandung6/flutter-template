@@ -6,7 +6,7 @@
 | --- | --- |
 | SDK | Flutter 3.44.1 via FVM |
 | Language | Dart 3.12.1 |
-| State | flutter_bloc, Cubit/BLoC |
+| State | flutter_bloc, Cubit-first with BLoC for event-driven flows |
 | DI | get_it, injectable |
 | Navigation | go_router |
 | HTTP | dio, retrofit |
@@ -57,8 +57,20 @@ UI event
 -> AuthRemoteDataSource / AuthLocalDataSource
 -> DTO <-> Entity mapping
 -> Either<Failure, UserEntity>
--> BaseBlocState<Auth data>
+-> BaseViewState<Auth data>
 ```
+
+## State Management Policy
+
+- Use `Cubit` by default for simple screen or app state.
+- Use `Bloc` when the feature benefits from explicit events, traceability, event
+  transformers, or multiple action sources.
+- Keep business rules in domain use cases. Cubit/BLoC coordinates presentation
+  state and maps use case results into view state.
+- `BaseViewState<T>` is a convenience for simple async view state. Complex
+  screens should define their own Freezed state.
+- Do not wire one Bloc/Cubit directly into another. Share data through use cases,
+  repositories, streams, or UI-level listeners.
 
 ## Routing
 

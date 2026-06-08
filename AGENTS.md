@@ -7,7 +7,8 @@ agents. Keep this file concise; put longer background in `docs/agents/`.
 
 - Flutter boilerplate pinned by FVM to Flutter `3.44.1` and Dart `3.12.1`.
 - Architecture: Clean Architecture with `core/`, `features/`, and `shared/`.
-- State management: BLoC/Cubit with reusable base state classes.
+- State management: Cubit-first with BLoC for event-driven flows, using reusable
+  base view state classes for simple async screens.
 - DI: GetIt + Injectable.
 - Navigation: GoRouter.
 - Networking: Dio + Retrofit, with DTOs in the data layer.
@@ -80,6 +81,9 @@ make test
 - `shared/`: reusable theme, widgets, base BLoC/Cubit primitives.
 - Do not make UI depend directly on remote/local data sources.
 - Do not make domain depend on Flutter, Dio, Retrofit, or storage.
+- Prefer Cubit for simple presentation/application state.
+- Use BLoC when explicit events, traceability, or event transformers are useful.
+- Keep domain business rules in use cases, not in Cubit/BLoC.
 
 ## Dependency And Codegen Rules
 

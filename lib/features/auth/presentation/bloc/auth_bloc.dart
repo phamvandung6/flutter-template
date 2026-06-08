@@ -11,7 +11,6 @@ import 'package:flutter_template/features/auth/domain/usecases/register_user.dar
 import 'package:flutter_template/features/auth/presentation/bloc/auth_event.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_state.dart';
 import 'package:flutter_template/shared/presentation/bloc/base_bloc.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
 
 /// BLoC for authentication state management using single state approach
 @injectable
@@ -102,28 +101,5 @@ class AuthBloc extends BaseBloc<AuthEvent, UserEntity> {
       context: 'auth_check',
       showLoading: !event.silent,
     );
-  }
-
-  @override
-  Future<void> onRefresh(RefreshEvent event, Emitter<AuthState> emit) async {
-    // Refresh auth status
-    add(CheckAuthStatus(silent: !event.forceRefresh));
-  }
-
-  @override
-  Future<void> onReset(ResetEvent event, Emitter<AuthState> emit) async {
-    // Reset to initial state
-    emit(AuthStateFactory.initial());
-  }
-
-  @override
-  Future<void> onRetry(RetryEvent event, Emitter<AuthState> emit) async {
-    // Retry based on current context
-    if (event.context == 'auth_check') {
-      add(const CheckAuthStatus());
-    } else {
-      // For other contexts, just refresh
-      await onRefresh(const RefreshEvent(), emit);
-    }
   }
 }

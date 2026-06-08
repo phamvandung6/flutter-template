@@ -20,9 +20,15 @@ the smallest relevant skill set before editing.
 - Prefer existing project patterns before introducing a new abstraction.
 - Keep domain pure: no Flutter, Dio, storage, or Retrofit imports.
 - Keep data-layer DTOs and API clients under `features/*/data`.
-- Use use cases as the boundary between BLoC and repositories.
+- Use use cases as the boundary between Cubit/BLoC and repositories.
 - Use `Either<Failure, T>` for recoverable domain/data results.
-- Use `BaseBlocState<T>` and existing state factories for presentation state.
+- Prefer Cubit for simple UI/application state.
+- Use Bloc when events, traceability, event transformers, or multi-source flows
+  make the behavior clearer.
+- Treat Cubit/BLoC as presentation/application state coordinators, not the place
+  for domain business rules.
+- Use `BaseViewState<T>` for simple async view state. Use feature-specific
+  Freezed state for forms, pagination, upload progress, or realtime screens.
 - Add tests near the behavior being changed.
 
 ## Memory Workflow

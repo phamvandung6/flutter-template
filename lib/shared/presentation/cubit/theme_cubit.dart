@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:flutter_template/core/utils/logger.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state.dart';
 import 'package:flutter_template/shared/presentation/cubit/base_cubit.dart';
 
 /// Theme mode options
@@ -28,8 +28,8 @@ class AppThemeData {
 class ThemeCubit extends BaseCubit<AppThemeData> {
   ThemeCubit(AppLogger logger)
     : super(
-        const BaseBlocState<AppThemeData>(
-          status: BlocStatus.success,
+        const BaseViewState<AppThemeData>(
+          status: ViewStatus.success,
           data: AppThemeData(
             mode: AppThemeMode.system,
             isDark: false,

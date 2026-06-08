@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_template/core/utils/logger.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state_extensions.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state_extensions.dart';
 
 /// Base Cubit class for simple state management using single state approach
-abstract class BaseCubit<T> extends Cubit<BaseBlocState<T>> {
+abstract class BaseCubit<T> extends Cubit<BaseViewState<T>> {
   BaseCubit(super.initialState, this._logger);
   final AppLogger _logger;
 
@@ -73,14 +73,14 @@ abstract class BaseCubit<T> extends Cubit<BaseBlocState<T>> {
   }
 
   /// Safe emit method that checks if cubit is not closed
-  void safeEmit(BaseBlocState<T> newState) {
+  void safeEmit(BaseViewState<T> newState) {
     if (!isClosed) {
       emit(newState);
     }
   }
 
   @override
-  void onChange(Change<BaseBlocState<T>> change) {
+  void onChange(Change<BaseViewState<T>> change) {
     super.onChange(change);
     _logger.debug(
       '$runtimeType state changed: ${change.currentState.status} -> ${change.nextState.status}',

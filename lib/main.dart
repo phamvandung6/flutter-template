@@ -9,7 +9,7 @@ import 'package:flutter_template/core/navigation/app_router.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:flutter_template/features/auth/presentation/bloc/auth_event.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state.dart';
 import 'package:flutter_template/shared/presentation/cubit/theme_cubit.dart';
 import 'package:flutter_template/shared/theme/theme.dart';
 
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           create: (_) => getIt<ThemeCubit>(),
         ),
       ],
-      child: BlocBuilder<ThemeCubit, BaseBlocState<AppThemeData>>(
+      child: BlocBuilder<ThemeCubit, BaseViewState<AppThemeData>>(
         builder: (context, themeState) {
           final themeData = themeState.data;
           final isDark = themeData?.isDark ?? false;

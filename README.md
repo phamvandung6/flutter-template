@@ -119,23 +119,64 @@ Windows PowerShell alternatives:
 
 ### Clean Architecture Layers
 
-- Presentation: BLoC, pages, and widgets
+- Presentation: Cubit/BLoC, pages, and widgets
 - Domain: entities, use cases, and repository interfaces
 - Data: models, data sources, and repository implementations
 
 ### State Management
 
-The template uses BLoC with a reusable single-state pattern:
+The template uses `flutter_bloc` with a Cubit-first guideline:
+
+- Use `Cubit` for simple screen/app UI state such as theme, filters, toggles,
+  and one-shot loads.
+- Use `Bloc` when the flow is event-driven, needs traceability, or needs event
+  handling such as debounce, retry, queueing, or cancellation.
+- Keep domain business rules in use cases. Cubit/BLoC should coordinate
+  presentation state, call use cases, and map results into view state.
+- `BaseViewState<T>` is the shared async view state for both Cubit and BLoC.
+  For complex forms, pagination, upload progress, or realtime screens, prefer a
+  feature-specific Freezed state instead of forcing everything into the base
+  state.
+
+Simple state should start with `BaseCubit<T>`:
 
 ```dart
-class UserBloc extends BaseBloc<User> {
-  UserBloc(this._getUserUseCase) : super(BaseBlocState.initial());
+class UserCubit extends BaseCubit<User> {
+  UserCubit(this._getUserUseCase, AppLogger logger)
+      : super(const BaseViewState<User>(), logger);
 
-  Future<void> loadUser() async {
-    await handleEitherResult(
-      _getUserUseCase(NoParams()),
-      onSuccess: (user) => emitSuccess(user),
-    );
+  final GetUserUseCase _getUserUseCase;
+
+  Future<void> loadUser() {
+    return handleEitherResult(_getUserUseCase(const NoParams()));
+  }
+}
+```
+
+Use `BaseBloc<Event, T>` when events make the flow clearer:
+
+```dart
+sealed class UserEvent extends BaseBlocEvent {
+  const UserEvent();
+}
+
+final class UserRequested extends UserEvent {
+  const UserRequested();
+}
+
+class UserBloc extends BaseBloc<UserEvent, User> {
+  UserBloc(this._getUserUseCase, AppLogger logger)
+      : super(const BaseViewState<User>(), logger) {
+    on<UserRequested>(_onUserRequested);
+  }
+
+  final GetUserUseCase _getUserUseCase;
+
+  Future<void> _onUserRequested(
+    UserRequested event,
+    Emitter<BaseViewState<User>> emit,
+  ) {
+    return handleEitherResult(emit, _getUserUseCase(const NoParams()));
   }
 }
 ```

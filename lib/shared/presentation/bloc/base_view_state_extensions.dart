@@ -1,22 +1,22 @@
 import 'package:flutter_template/core/error/failures.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state.dart';
 
-/// Extensions for BaseBlocState to provide convenient getters and methods
-extension BaseBlocStateX<T> on BaseBlocState<T> {
+/// Extensions for BaseViewState to provide convenient getters and methods
+extension BaseViewStateX<T> on BaseViewState<T> {
   /// Check if state is initial
-  bool get isInitial => status == BlocStatus.initial;
+  bool get isInitial => status == ViewStatus.initial;
 
   /// Check if state is loading
-  bool get isLoading => status == BlocStatus.loading;
+  bool get isLoading => status == ViewStatus.loading;
 
   /// Check if state is success
-  bool get isSuccess => status == BlocStatus.success;
+  bool get isSuccess => status == ViewStatus.success;
 
   /// Check if state has error
-  bool get hasError => status == BlocStatus.error;
+  bool get hasError => status == ViewStatus.error;
 
   /// Check if state is empty
-  bool get isEmpty => status == BlocStatus.empty;
+  bool get isEmpty => status == ViewStatus.empty;
 
   /// Check if state has data
   bool get hasData => data != null;
@@ -69,18 +69,18 @@ extension BaseBlocStateX<T> on BaseBlocState<T> {
   bool get shouldShowContent => isSuccess && hasData;
 
   /// Create a loading state
-  BaseBlocState<T> toLoading({String? message}) {
+  BaseViewState<T> toLoading({String? message}) {
     return copyWith(
-      status: BlocStatus.loading,
+      status: ViewStatus.loading,
       message: message,
       failure: null,
     );
   }
 
   /// Create a success state
-  BaseBlocState<T> toSuccess(T data, {String? message}) {
+  BaseViewState<T> toSuccess(T data, {String? message}) {
     return copyWith(
-      status: BlocStatus.success,
+      status: ViewStatus.success,
       data: data,
       message: message,
       failure: null,
@@ -88,9 +88,9 @@ extension BaseBlocStateX<T> on BaseBlocState<T> {
   }
 
   /// Create an error state
-  BaseBlocState<T> toError(Failure failure, {String? context}) {
+  BaseViewState<T> toError(Failure failure, {String? context}) {
     return copyWith(
-      status: BlocStatus.error,
+      status: ViewStatus.error,
       failure: failure,
       context: context,
       data: null,
@@ -98,9 +98,9 @@ extension BaseBlocStateX<T> on BaseBlocState<T> {
   }
 
   /// Create an empty state
-  BaseBlocState<T> toEmpty({String? message}) {
+  BaseViewState<T> toEmpty({String? message}) {
     return copyWith(
-      status: BlocStatus.empty,
+      status: ViewStatus.empty,
       message: message,
       failure: null,
       data: null,
@@ -108,9 +108,9 @@ extension BaseBlocStateX<T> on BaseBlocState<T> {
   }
 
   /// Create an initial state
-  BaseBlocState<T> toInitial() {
+  BaseViewState<T> toInitial() {
     return copyWith(
-      status: BlocStatus.initial,
+      status: ViewStatus.initial,
       data: null,
       failure: null,
       message: null,

@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:flutter_template/core/error/failures.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state.dart';
 import 'package:flutter_template/shared/presentation/cubit/base_cubit.dart';
 import '../../../mocks/mock_dependencies.dart';
 
@@ -52,7 +52,7 @@ void main() {
       MockSetup.setupMocks();
       mockLogger = MockAppLogger();
       cubit = TestBaseCubit(
-        const BaseBlocState<String>(),
+        const BaseViewState<String>(),
         mockLogger,
       );
     });
@@ -62,41 +62,41 @@ void main() {
     });
 
     test('initial state should be correct', () {
-      expect(cubit.state, equals(const BaseBlocState<String>()));
+      expect(cubit.state, equals(const BaseViewState<String>()));
     });
 
     group('emitLoading', () {
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should emit loading state with message',
         build: () => cubit,
         act: (cubit) => cubit.testEmitLoading(),
         expect: () => [
-          const BaseBlocState<String>(
-            status: BlocStatus.loading,
+          const BaseViewState<String>(
+            status: ViewStatus.loading,
             message: 'Loading...',
           ),
         ],
       );
 
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should not emit when cubit is closed',
         build: () => cubit,
         act: (cubit) async {
           await cubit.close();
           cubit.testEmitLoading();
         },
-        expect: () => <BaseBlocState<String>>[],
+        expect: () => <BaseViewState<String>>[],
       );
     });
 
     group('emitSuccess', () {
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should emit success state with data and message',
         build: () => cubit,
         act: (cubit) => cubit.testEmitSuccess('test data'),
         expect: () => [
-          const BaseBlocState<String>(
-            status: BlocStatus.success,
+          const BaseViewState<String>(
+            status: ViewStatus.success,
             data: 'test data',
             message: 'Success',
           ),
@@ -105,7 +105,7 @@ void main() {
     });
 
     group('emitError', () {
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should emit error state and log error',
         build: () => cubit,
         act: (cubit) {
@@ -113,8 +113,8 @@ void main() {
           cubit.testEmitError(failure);
         },
         expect: () => [
-          const BaseBlocState<String>(
-            status: BlocStatus.error,
+          const BaseViewState<String>(
+            status: ViewStatus.error,
             failure: ServerFailure(message: 'Test error', statusCode: 500),
             context: 'Test context',
           ),
@@ -128,13 +128,13 @@ void main() {
     });
 
     group('emitEmpty', () {
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should emit empty state with message',
         build: () => cubit,
         act: (cubit) => cubit.testEmitEmpty(),
         expect: () => [
-          const BaseBlocState<String>(
-            status: BlocStatus.empty,
+          const BaseViewState<String>(
+            status: ViewStatus.empty,
             message: 'Empty',
           ),
         ],
@@ -142,20 +142,20 @@ void main() {
     });
 
     group('handleEitherResult', () {
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should emit loading then success when Right is returned',
         build: () => cubit,
         act: (cubit) => cubit.testHandleEitherSuccess('success data'),
         expect: () => [
-          const BaseBlocState<String>(status: BlocStatus.loading),
-          const BaseBlocState<String>(
-            status: BlocStatus.success,
+          const BaseViewState<String>(status: ViewStatus.loading),
+          const BaseViewState<String>(
+            status: ViewStatus.success,
             data: 'success data',
           ),
         ],
       );
 
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should emit loading then error when Left is returned',
         build: () => cubit,
         act: (cubit) {
@@ -166,21 +166,21 @@ void main() {
           return cubit.testHandleEitherFailure(failure);
         },
         expect: () => [
-          const BaseBlocState<String>(status: BlocStatus.loading),
-          const BaseBlocState<String>(
-            status: BlocStatus.error,
+          const BaseViewState<String>(status: ViewStatus.loading),
+          const BaseViewState<String>(
+            status: ViewStatus.error,
             failure: ServerFailure(message: 'Test failure', statusCode: 500),
           ),
         ],
       );
 
-      blocTest<TestBaseCubit, BaseBlocState<String>>(
+      blocTest<TestBaseCubit, BaseViewState<String>>(
         'should not emit loading when showLoading is false',
         build: () => cubit,
         act: (cubit) => cubit.testHandleEitherWithoutLoading('success data'),
         expect: () => [
-          const BaseBlocState<String>(
-            status: BlocStatus.success,
+          const BaseViewState<String>(
+            status: ViewStatus.success,
             data: 'success data',
           ),
         ],

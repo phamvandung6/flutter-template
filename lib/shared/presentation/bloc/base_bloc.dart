@@ -4,49 +4,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_template/core/utils/logger.dart';
 import 'package:flutter_template/shared/presentation/bloc/base_bloc_event.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state.dart';
-import 'package:flutter_template/shared/presentation/bloc/base_bloc_state_extensions.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state.dart';
+import 'package:flutter_template/shared/presentation/bloc/base_view_state_extensions.dart';
 
 /// Base BLoC class with common functionality using single state approach
 abstract class BaseBloc<Event extends BaseBlocEvent, T>
-    extends Bloc<Event, BaseBlocState<T>> {
+    extends Bloc<Event, BaseViewState<T>> {
   BaseBloc(super.initialState, this._logger);
   final AppLogger _logger;
 
-  /// Override this method to handle refresh events
-  Future<void> onRefresh(
-    RefreshEvent event,
-    Emitter<BaseBlocState<T>> emit,
-  ) async {
-    // Default implementation - override in subclasses
-    _logger.debug('Default refresh implementation - override in subclass');
-  }
-
-  /// Override this method to handle reset events
-  Future<void> onReset(ResetEvent event, Emitter<BaseBlocState<T>> emit) async {
-    // Default implementation - override in subclasses
-    _logger.debug('Default reset implementation - override in subclass');
-  }
-
-  /// Override this method to handle retry events
-  Future<void> onRetry(RetryEvent event, Emitter<BaseBlocState<T>> emit) async {
-    // Default implementation - override in subclasses
-    _logger.debug('Default retry implementation - override in subclass');
-  }
-
   /// Helper method to emit loading state
-  void emitLoading(Emitter<BaseBlocState<T>> emit, {String? message}) {
+  void emitLoading(Emitter<BaseViewState<T>> emit, {String? message}) {
     emit(state.toLoading(message: message));
   }
 
   /// Helper method to emit success state
-  void emitSuccess(Emitter<BaseBlocState<T>> emit, T data, {String? message}) {
+  void emitSuccess(Emitter<BaseViewState<T>> emit, T data, {String? message}) {
     emit(state.toSuccess(data, message: message));
   }
 
   /// Helper method to emit error state
   void emitError(
-    Emitter<BaseBlocState<T>> emit,
+    Emitter<BaseViewState<T>> emit,
     Failure failure, {
     String? context,
   }) {
@@ -55,13 +34,13 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
   }
 
   /// Helper method to emit empty state
-  void emitEmpty(Emitter<BaseBlocState<T>> emit, {String? message}) {
+  void emitEmpty(Emitter<BaseViewState<T>> emit, {String? message}) {
     emit(state.toEmpty(message: message));
   }
 
   /// Helper method to handle either result from use cases
   Future<void> handleEitherResult<R>(
-    Emitter<BaseBlocState<T>> emit,
+    Emitter<BaseViewState<T>> emit,
     Future<Either<Failure, R>> either, {
     void Function(R data)? onSuccess,
     String? context,
@@ -90,7 +69,7 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
   }
 
   @override
-  void onChange(Change<BaseBlocState<T>> change) {
+  void onChange(Change<BaseViewState<T>> change) {
     super.onChange(change);
     _logger.debug(
       '$runtimeType state changed: ${change.currentState.status} -> ${change.nextState.status}',
@@ -98,7 +77,7 @@ abstract class BaseBloc<Event extends BaseBlocEvent, T>
   }
 
   @override
-  void onTransition(Transition<Event, BaseBlocState<T>> transition) {
+  void onTransition(Transition<Event, BaseViewState<T>> transition) {
     super.onTransition(transition);
     _logger.debug(
       '$runtimeType transition: ${transition.event.runtimeType} -> ${transition.nextState.status}',

@@ -31,6 +31,12 @@ sessions. It is not a scratchpad and must not contain secrets.
 - Keep lint strict for correctness but relaxed for boilerplate ergonomics.
 - Prefer explicit DTO/entity mapping instead of leaking data-layer types into
   domain or presentation layers.
+- Use Cubit by default for simple presentation/application state.
+- Use BLoC for event-driven flows that need traceability, event transformers, or
+  multiple action sources.
+- Keep domain business rules in use cases, not in Cubit/BLoC.
+- Keep `BaseBlocEvent` minimal; feature-specific events should live with each
+  feature instead of relying on generic refresh/reset/retry events.
 - Keep generated files out of git to reduce template noise.
 
 ## Do Not Store Here

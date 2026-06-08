@@ -117,13 +117,13 @@ class HomePage extends StatelessWidget {
 
   Widget _buildFeatureList(BuildContext context) {
     final features = [
-      '✅ Clean Architecture (Domain/Data/Presentation)',
-      '✅ BLoC State Management with Single State',
-      '✅ Dependency Injection (GetIt + Injectable)',
-      '✅ Network Layer (Dio + Retrofit)',
-      '✅ Material Design 3 Theme System',
-      '✅ Responsive Design',
-      '✅ Go Router Navigation',
+      '- Clean Architecture (Domain/Data/Presentation)',
+      '- Cubit-first State Management with BLoC support',
+      '- Dependency Injection (GetIt + Injectable)',
+      '- Network Layer (Dio + Retrofit)',
+      '- Material Design 3 Theme System',
+      '- Responsive Design',
+      '- Go Router Navigation',
     ];
 
     return Column(
