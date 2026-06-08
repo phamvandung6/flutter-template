@@ -43,14 +43,14 @@ class RegisterRequested extends AuthEvent {
 
   @override
   List<Object?> get props => [
-        firstName,
-        lastName,
-        email,
-        password,
-        passwordConfirmation,
-        phoneNumber,
-        termsAccepted,
-      ];
+    firstName,
+    lastName,
+    email,
+    password,
+    passwordConfirmation,
+    phoneNumber,
+    termsAccepted,
+  ];
 }
 
 /// Event triggered when user requests logout

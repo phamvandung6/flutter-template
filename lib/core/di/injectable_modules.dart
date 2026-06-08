@@ -10,19 +10,17 @@ abstract class InjectableModules {
   // Network Module
   @lazySingleton
   Dio get dio => Dio(
-        BaseOptions(
-          baseUrl: AppConfig.baseUrl,
-          connectTimeout:
-              Duration(milliseconds: AppConfig.config.connectTimeout),
-          receiveTimeout:
-              Duration(milliseconds: AppConfig.config.receiveTimeout),
-          sendTimeout: Duration(milliseconds: AppConfig.config.sendTimeout),
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-        ),
-      );
+    BaseOptions(
+      baseUrl: AppConfig.baseUrl,
+      connectTimeout: Duration(milliseconds: AppConfig.config.connectTimeout),
+      receiveTimeout: Duration(milliseconds: AppConfig.config.receiveTimeout),
+      sendTimeout: Duration(milliseconds: AppConfig.config.sendTimeout),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    ),
+  );
 
   // Connectivity Module
   @lazySingleton
@@ -31,11 +29,8 @@ abstract class InjectableModules {
   // Storage Module
   @lazySingleton
   FlutterSecureStorage get secureStorage => const FlutterSecureStorage(
-        aOptions: AndroidOptions(
-          encryptedSharedPreferences: true,
-        ),
-        iOptions: IOSOptions(
-          accessibility: KeychainAccessibility.first_unlock_this_device,
-        ),
-      );
+    iOptions: IOSOptions(
+      accessibility: KeychainAccessibility.first_unlock_this_device,
+    ),
+  );
 }

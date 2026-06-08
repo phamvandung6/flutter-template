@@ -57,8 +57,8 @@ void main() {
       );
     });
 
-    tearDown(() {
-      cubit.close();
+    tearDown(() async {
+      await cubit.close();
     });
 
     test('initial state should be correct', () {
@@ -120,8 +120,9 @@ void main() {
           ),
         ],
         verify: (_) {
-          verify(() => mockLogger.error('Cubit error: Test error', any()))
-              .called(1);
+          verify(
+            () => mockLogger.error('Cubit error: Test error', any()),
+          ).called(1);
         },
       );
     });
@@ -158,8 +159,10 @@ void main() {
         'should emit loading then error when Left is returned',
         build: () => cubit,
         act: (cubit) {
-          const failure =
-              ServerFailure(message: 'Test failure', statusCode: 500);
+          const failure = ServerFailure(
+            message: 'Test failure',
+            statusCode: 500,
+          );
           return cubit.testHandleEitherFailure(failure);
         },
         expect: () => [
@@ -183,20 +186,22 @@ void main() {
         ],
       );
 
-      test('should not emit when cubit is closed during async operation',
-          () async {
-        // Start the async operation
-        final future = cubit.testHandleEitherSuccess('test data');
+      test(
+        'should not emit when cubit is closed during async operation',
+        () async {
+          // Start the async operation
+          final future = cubit.testHandleEitherSuccess('test data');
 
-        // Close the cubit immediately
-        await cubit.close();
+          // Close the cubit immediately
+          await cubit.close();
 
-        // Wait for the operation to complete
-        await future;
+          // Wait for the operation to complete
+          await future;
 
-        // Verify no additional states were emitted after closing
-        expect(cubit.isClosed, isTrue);
-      });
+          // Verify no additional states were emitted after closing
+          expect(cubit.isClosed, isTrue);
+        },
+      );
     });
   });
 }

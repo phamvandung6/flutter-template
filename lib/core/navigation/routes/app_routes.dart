@@ -33,26 +33,26 @@ class AppRoutes {
 
   // Get all route paths for validation
   static List<String> get allRoutes => [
-        splash,
-        onboarding,
-        home,
-        login,
-        register,
-        forgotPassword,
-        resetPassword,
-        verifyEmail,
-        profile,
-        editProfile,
-        changePassword,
-        settings,
-        settingsTheme,
-        settingsLanguage,
-        settingsNotifications,
-        settingsPrivacy,
-        settingsAbout,
-        notFound,
-        error,
-      ];
+    splash,
+    onboarding,
+    home,
+    login,
+    register,
+    forgotPassword,
+    resetPassword,
+    verifyEmail,
+    profile,
+    editProfile,
+    changePassword,
+    settings,
+    settingsTheme,
+    settingsLanguage,
+    settingsNotifications,
+    settingsPrivacy,
+    settingsAbout,
+    notFound,
+    error,
+  ];
 
   // Route names for analytics and debugging
   static const Map<String, String> routeNames = {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 /// Loading indicator variants
@@ -34,8 +36,8 @@ class AppLoadingIndicator extends StatelessWidget {
     this.color,
     this.message,
     this.showMessage = false,
-  })  : type = LoadingIndicatorType.linear,
-        size = null;
+  }) : type = LoadingIndicatorType.linear,
+       size = null;
 
   /// Dots loading indicator
   const AppLoadingIndicator.dots({
@@ -104,7 +106,7 @@ class AppLoadingIndicator extends StatelessWidget {
       case LoadingIndicatorType.linear:
         return LinearProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(effectiveColor),
-          backgroundColor: effectiveColor.withOpacity(0.2),
+          backgroundColor: effectiveColor.withValues(alpha: 0.2),
         );
 
       case LoadingIndicatorType.dots:
@@ -161,7 +163,7 @@ class _DotsLoadingIndicatorState extends State<_DotsLoadingIndicator>
       );
     });
 
-    _controller.repeat();
+    unawaited(_controller.repeat());
   }
 
   @override
@@ -187,8 +189,9 @@ class _DotsLoadingIndicatorState extends State<_DotsLoadingIndicator>
                   width: widget.size * 0.3,
                   height: widget.size * 0.3,
                   decoration: BoxDecoration(
-                    color: widget.color
-                        .withOpacity(0.3 + (_animations[index].value * 0.7)),
+                    color: widget.color.withValues(
+                      alpha: 0.3 + (_animations[index].value * 0.7),
+                    ),
                     shape: BoxShape.circle,
                   ),
                 ),
@@ -231,7 +234,7 @@ class _PulseLoadingIndicatorState extends State<_PulseLoadingIndicator>
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    _controller.repeat(reverse: true);
+    unawaited(_controller.repeat(reverse: true));
   }
 
   @override
@@ -251,7 +254,9 @@ class _PulseLoadingIndicatorState extends State<_PulseLoadingIndicator>
             width: widget.size,
             height: widget.size,
             decoration: BoxDecoration(
-              color: widget.color.withOpacity(0.3 + (_animation.value * 0.4)),
+              color: widget.color.withValues(
+                alpha: 0.3 + (_animation.value * 0.4),
+              ),
               shape: BoxShape.circle,
             ),
           ),

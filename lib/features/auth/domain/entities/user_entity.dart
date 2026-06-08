@@ -4,7 +4,7 @@ part 'user_entity.freezed.dart';
 
 /// Domain Entity for User - pure business logic without external dependencies
 @freezed
-class UserEntity with _$UserEntity {
+abstract class UserEntity with _$UserEntity {
   const factory UserEntity({
     required String id,
     required String firstName,

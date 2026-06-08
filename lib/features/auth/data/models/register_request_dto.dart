@@ -5,7 +5,7 @@ part 'register_request_dto.g.dart';
 
 /// Data Transfer Object for register request
 @freezed
-class RegisterRequestDto with _$RegisterRequestDto {
+abstract class RegisterRequestDto with _$RegisterRequestDto {
   const factory RegisterRequestDto({
     @JsonKey(name: 'first_name') required String firstName,
     @JsonKey(name: 'last_name') required String lastName,

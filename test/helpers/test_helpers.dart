@@ -105,8 +105,8 @@ class TestHelpers {
     final finder = key != null
         ? findByKey(key)
         : widgetType != null
-            ? find.byType(widgetType)
-            : find.byType(TextField);
+        ? find.byType(widgetType)
+        : find.byType(TextField);
 
     await tester.enterText(finder, text);
     await pumpAndSettle(tester);

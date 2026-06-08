@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -28,7 +30,7 @@ class NavigationService {
   /// Push a route
   void push(String route, {Map<String, dynamic>? extra}) {
     _logger.info('Navigation: Pushing $route');
-    GoRouter.of(currentContext!).push(route, extra: extra);
+    unawaited(GoRouter.of(currentContext!).push(route, extra: extra));
   }
 
   /// Pop current route
@@ -45,7 +47,9 @@ class NavigationService {
   /// Replace current route
   void replace(String route, {Map<String, dynamic>? extra}) {
     _logger.info('Navigation: Replacing with $route');
-    GoRouter.of(currentContext!).pushReplacement(route, extra: extra);
+    unawaited(
+      GoRouter.of(currentContext!).pushReplacement(route, extra: extra),
+    );
   }
 
   /// Clear stack and go to route

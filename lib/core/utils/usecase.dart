@@ -2,26 +2,26 @@ import 'package:flutter_template/core/utils/typedef.dart';
 
 /// Base class for all use cases
 // ignore: one_member_abstracts
-abstract class UseCase<Type, Params> {
+abstract class UseCase<TResult, Params> {
   const UseCase();
 
-  ResultFuture<Type> call(Params params);
+  ResultFuture<TResult> call(Params params);
 }
 
 /// Use case with no parameters
 // ignore: one_member_abstracts
-abstract class UseCaseWithoutParams<Type> {
+abstract class UseCaseWithoutParams<TResult> {
   const UseCaseWithoutParams();
 
-  ResultFuture<Type> call();
+  ResultFuture<TResult> call();
 }
 
 /// Use case with stream return type
 // ignore: one_member_abstracts
-abstract class StreamUseCase<Type, Params> {
+abstract class StreamUseCase<TResult, Params> {
   const StreamUseCase();
 
-  Stream<Type> call(Params params);
+  Stream<TResult> call(Params params);
 }
 
 /// Parameters class for use cases that don't need parameters

@@ -75,10 +75,9 @@ class ErrorInterceptor extends Interceptor {
     var errorMessage = 'An error occurred';
 
     if (data is Map<String, dynamic>) {
-      errorMessage = (data['message'] ??
-          data['error'] ??
-          data['detail'] ??
-          errorMessage) as String;
+      errorMessage =
+          (data['message'] ?? data['error'] ?? data['detail'] ?? errorMessage)
+              as String;
     }
 
     switch (statusCode) {

@@ -30,10 +30,10 @@ abstract class AuthApiClient {
   factory AuthApiClient(Dio dio) = _AuthApiClient;
 
   @POST('/login')
-  Future<LoginResponseDto> login(@Body() LoginRequestDto request);
+  Future<LoginResponseDto> login(@Body() Map<String, dynamic> body);
 
   @POST('/register')
-  Future<UserDto> register(@Body() RegisterRequestDto request);
+  Future<UserDto> register(@Body() Map<String, dynamic> body);
 
   @POST('/refresh')
   Future<LoginResponseDto> refreshToken(@Body() Map<String, String> body);
@@ -65,12 +65,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<LoginResponseDto> login(LoginRequestDto request) {
-    return _apiClient.login(request);
+    return _apiClient.login(request.toJson());
   }
 
   @override
   Future<UserDto> register(RegisterRequestDto request) {
-    return _apiClient.register(request);
+    return _apiClient.register(request.toJson());
   }
 
   @override

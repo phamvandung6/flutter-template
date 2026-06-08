@@ -28,20 +28,20 @@ extension BaseBlocStateX<T> on BaseBlocState<T> {
   String get errorMessage {
     if (failure == null) return message ?? 'Unknown error occurred';
 
-    switch (failure.runtimeType) {
-      case NetworkFailure _:
+    switch (failure) {
+      case NetworkFailure():
         return 'No internet connection. Please check your network.';
-      case ServerFailure _:
+      case ServerFailure():
         return failure!.message.isNotEmpty
             ? failure!.message
             : 'Server error occurred. Please try again.';
-      case AuthenticationFailure _:
+      case AuthenticationFailure():
         return 'Authentication failed. Please login again.';
-      case ValidationFailure _:
+      case ValidationFailure():
         return failure!.message.isNotEmpty
             ? failure!.message
             : 'Invalid input. Please check your data.';
-      case CacheFailure _:
+      case CacheFailure():
         return 'Data not available offline.';
       default:
         return failure!.message.isNotEmpty

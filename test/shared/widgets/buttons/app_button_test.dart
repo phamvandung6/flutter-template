@@ -26,8 +26,9 @@ void main() {
       expect(find.byType(ElevatedButton), findsOneWidget);
     });
 
-    testWidgets('should be disabled when onPressed is null',
-        (WidgetTester tester) async {
+    testWidgets('should be disabled when onPressed is null', (
+      WidgetTester tester,
+    ) async {
       // Arrange
       const buttonText = 'Disabled Button';
 
@@ -45,8 +46,9 @@ void main() {
       expect(button.onPressed, isNull);
     });
 
-    testWidgets('should call onPressed when tapped',
-        (WidgetTester tester) async {
+    testWidgets('should call onPressed when tapped', (
+      WidgetTester tester,
+    ) async {
       // Arrange
       var wasPressed = false;
       const buttonText = 'Clickable Button';
@@ -69,8 +71,9 @@ void main() {
     });
 
     group('Variants', () {
-      testWidgets('should render primary button by default',
-          (WidgetTester tester) async {
+      testWidgets('should render primary button by default', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(
@@ -85,8 +88,9 @@ void main() {
         expect(find.byType(ElevatedButton), findsOneWidget);
       });
 
-      testWidgets('should render secondary button',
-          (WidgetTester tester) async {
+      testWidgets('should render secondary button', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(
@@ -148,8 +152,9 @@ void main() {
     });
 
     group('Loading State', () {
-      testWidgets('should show loading indicator when isLoading is true',
-          (WidgetTester tester) async {
+      testWidgets('should show loading indicator when isLoading is true', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(
@@ -166,8 +171,9 @@ void main() {
         expect(find.text('Loading'), findsOneWidget);
       });
 
-      testWidgets('should disable button when loading',
-          (WidgetTester tester) async {
+      testWidgets('should disable button when loading', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(
@@ -180,15 +186,17 @@ void main() {
         );
 
         // Assert
-        final button =
-            tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+        final button = tester.widget<ElevatedButton>(
+          find.byType(ElevatedButton),
+        );
         expect(button.onPressed, isNull);
       });
     });
 
     group('Icon', () {
-      testWidgets('should show icon when provided',
-          (WidgetTester tester) async {
+      testWidgets('should show icon when provided', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(
@@ -225,8 +233,9 @@ void main() {
     });
 
     group('Full Width', () {
-      testWidgets('should be full width when isFullWidth is true',
-          (WidgetTester tester) async {
+      testWidgets('should be full width when isFullWidth is true', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(
@@ -314,8 +323,9 @@ void main() {
         expect(find.byType(AppButton), findsOneWidget);
       });
 
-      testWidgets('should apply custom border radius',
-          (WidgetTester tester) async {
+      testWidgets('should apply custom border radius', (
+        WidgetTester tester,
+      ) async {
         // Act
         await tester.pumpWidget(
           TestHelpers.createApp(

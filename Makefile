@@ -1,7 +1,11 @@
 # Flutter Template Makefile
 # Provides shortcuts for common development tasks
 
-.PHONY: help build-runner clean get test test-unit test-widget test-coverage-html analyze format lint quality quality-check pre-commit setup-hooks watch
+FVM ?= fvm
+FLUTTER := $(FVM) flutter
+DART := $(FVM) dart
+
+.PHONY: help fvm-install build-runner clean get test test-unit test-widget test-coverage-html analyze format lint quality quality-check pre-commit setup-hooks watch
 
 # Default target
 help: ## Show this help message
@@ -10,56 +14,59 @@ help: ## Show this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 # Dependencies
+fvm-install: ## Install/use the pinned Flutter SDK from .fvmrc
+	$(FVM) use --skip-pub-get
+
 get: ## Get Flutter dependencies
-	flutter pub get
+	$(FLUTTER) pub get
 
 # Code Generation
 build-runner: ## Run code generation for all files
-	dart run build_runner build --delete-conflicting-outputs
+	$(DART) run build_runner build
 
 build-runner-watch: ## Run code generation in watch mode
-	dart run build_runner watch --delete-conflicting-outputs
+	$(DART) run build_runner watch
 
 clean-build: ## Clean generated files and rebuild
-	dart run build_runner clean
-	dart run build_runner build --delete-conflicting-outputs
+	$(DART) run build_runner clean
+	$(DART) run build_runner build
 
 # Specific generators
 gen-injectable: ## Generate dependency injection code only
-	dart run build_runner build --delete-conflicting-outputs injectable_generator
+	$(DART) run build_runner build injectable_generator
 
 gen-json: ## Generate JSON serialization code only
-	dart run build_runner build --delete-conflicting-outputs json_serializable
+	$(DART) run build_runner build json_serializable
 
 gen-retrofit: ## Generate Retrofit API client code only
-	dart run build_runner build --delete-conflicting-outputs retrofit_generator
+	$(DART) run build_runner build retrofit_generator
 
 gen-freezed: ## Generate Freezed classes only
-	dart run build_runner build --delete-conflicting-outputs freezed
+	$(DART) run build_runner build freezed
 
 # Code Quality
 analyze: ## Run Flutter analyzer
-	flutter analyze
+	$(FLUTTER) analyze
 
 format: ## Format Dart code
-	dart format lib/ test/ --set-exit-if-changed
+	$(DART) format lib/ test/ --set-exit-if-changed
 
 format-fix: ## Format and fix Dart code
-	dart format lib/ test/ --fix
+	$(DART) format lib/ test/ --fix
 
 lint: ## Run all linting checks
-	flutter analyze && dart format lib/ test/ --set-exit-if-changed
+	$(FLUTTER) analyze && $(DART) format lib/ test/ --set-exit-if-changed
 
 quality: ## Run full code quality checks (analyze + format + imports)
 	@echo "🔍 Running code quality checks..."
-	dart run import_sorter:main
-	dart format lib/ test/ --fix
-	flutter analyze
+	$(DART) run import_sorter:main
+	$(DART) format lib/ test/ --fix
+	$(FLUTTER) analyze
 
 quality-check: ## Check code quality without fixing
 	@echo "🔍 Checking code quality..."
-	flutter analyze
-	dart format lib/ test/ --set-exit-if-changed
+	$(FLUTTER) analyze
+	$(DART) format lib/ test/ --set-exit-if-changed
 
 pre-commit: quality-check test ## Run pre-commit checks (quality + tests)
 	@echo "✅ Pre-commit checks passed!"
@@ -73,20 +80,20 @@ setup-hooks: ## Setup Git pre-commit hooks
 
 # Testing
 test: ## Run all tests
-	flutter test
+	$(FLUTTER) test
 
 test-coverage: ## Run tests with coverage
-	flutter test --coverage
+	$(FLUTTER) test --coverage
 
 test-unit: ## Run unit tests only
-	flutter test test/core/ test/shared/
+	$(FLUTTER) test test/core/ test/shared/
 
 test-widget: ## Run widget tests only
-	flutter test test/shared/widgets/
+	$(FLUTTER) test test/shared/widgets/
 
 test-coverage-html: ## Run tests with coverage and generate HTML report
 	@rm -rf coverage/
-	flutter test --coverage
+	$(FLUTTER) test --coverage
 	@if command -v genhtml >/dev/null 2>&1; then \
 		genhtml coverage/lcov.info -o coverage/html; \
 		echo "📄 Coverage report generated at coverage/html/index.html"; \
@@ -96,63 +103,63 @@ test-coverage-html: ## Run tests with coverage and generate HTML report
 
 # Cleaning
 clean: ## Clean build artifacts
-	flutter clean
-	dart run build_runner clean
+	$(FLUTTER) clean
+	$(DART) run build_runner clean
 
 clean-all: clean get build-runner ## Clean everything and rebuild
 
 # Import sorting
 sort-imports: ## Sort imports using import_sorter
-	dart run import_sorter:main
+	$(DART) run import_sorter:main
 
 # Development workflow
-dev-setup: get build-runner sort-imports format analyze ## Complete development setup
+dev-setup: fvm-install get build-runner sort-imports format analyze ## Complete development setup
 
 # Build commands
 build-android: ## Build Android APK
-	flutter build apk
+	$(FLUTTER) build apk
 
 build-ios: ## Build iOS
-	flutter build ios
+	$(FLUTTER) build ios
 
 build-web: ## Build for web
-	flutter build web
+	$(FLUTTER) build web
 
 # Run commands
 run-dev: ## Run development flavor
-	flutter run --flavor development --dart-define=FLAVOR=development
+	$(FLUTTER) run --flavor development --dart-define=FLAVOR=development
 
 run-staging: ## Run staging flavor
-	flutter run --flavor staging --dart-define=FLAVOR=staging
+	$(FLUTTER) run --flavor staging --dart-define=FLAVOR=staging
 
 run-prod: ## Run production flavor
-	flutter run --flavor production --dart-define=FLAVOR=production
+	$(FLUTTER) run --flavor production --dart-define=FLAVOR=production
 
 run-debug: ## Run app in debug mode
-	flutter run --debug
+	$(FLUTTER) run --debug
 
 run-release: ## Run app in release mode
-	flutter run --release
+	$(FLUTTER) run --release
 
 # Flavor builds
 build-dev-debug: ## Build development debug
-	flutter build apk --flavor development --debug --dart-define=FLAVOR=development
+	$(FLUTTER) build apk --flavor development --debug --dart-define=FLAVOR=development
 
 build-dev-release: ## Build development release
-	flutter build apk --flavor development --release --dart-define=FLAVOR=development
+	$(FLUTTER) build apk --flavor development --release --dart-define=FLAVOR=development
 
 build-staging-release: ## Build staging release
-	flutter build apk --flavor staging --release --dart-define=FLAVOR=staging
+	$(FLUTTER) build apk --flavor staging --release --dart-define=FLAVOR=staging
 
 build-prod-release: ## Build production release
-	flutter build apk --flavor production --release --dart-define=FLAVOR=production
-	flutter build appbundle --flavor production --release --dart-define=FLAVOR=production
+	$(FLUTTER) build apk --flavor production --release --dart-define=FLAVOR=production
+	$(FLUTTER) build appbundle --flavor production --release --dart-define=FLAVOR=production
 
 build-all-flavors: ## Build all flavors
-	flutter build apk --flavor development --release --dart-define=FLAVOR=development
-	flutter build apk --flavor staging --release --dart-define=FLAVOR=staging
-	flutter build apk --flavor production --release --dart-define=FLAVOR=production
-	flutter build appbundle --flavor production --release --dart-define=FLAVOR=production
+	$(FLUTTER) build apk --flavor development --release --dart-define=FLAVOR=development
+	$(FLUTTER) build apk --flavor staging --release --dart-define=FLAVOR=staging
+	$(FLUTTER) build apk --flavor production --release --dart-define=FLAVOR=production
+	$(FLUTTER) build appbundle --flavor production --release --dart-define=FLAVOR=production
 
 # Environment setup
 setup-development: clean get build-runner run-dev ## Complete development environment setup

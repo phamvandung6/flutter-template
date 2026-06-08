@@ -59,8 +59,8 @@ class AppCard extends StatelessWidget {
     this.leading,
     this.trailing,
     this.showDivider = false,
-  })  : variant = AppCardVariant.filled,
-        elevation = 0;
+  }) : variant = AppCardVariant.filled,
+       elevation = 0;
 
   /// Outlined card constructor
   const AppCard.outlined({
@@ -76,8 +76,8 @@ class AppCard extends StatelessWidget {
     this.leading,
     this.trailing,
     this.showDivider = false,
-  })  : variant = AppCardVariant.outlined,
-        elevation = 0;
+  }) : variant = AppCardVariant.outlined,
+       elevation = 0;
   final Widget child;
   final AppCardVariant variant;
   final EdgeInsets? padding;
@@ -219,8 +219,9 @@ class AppCard extends StatelessWidget {
         return Container(
           padding: effectivePadding,
           decoration: BoxDecoration(
-            color: backgroundColor ??
-                colorScheme.surfaceContainerHighest.withOpacity(0.3),
+            color:
+                backgroundColor ??
+                colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
             borderRadius: effectiveBorderRadius,
           ),
           child: content,
@@ -261,7 +262,8 @@ class AppLoadingCard extends StatelessWidget {
     return AppCard(
       child: isLoading
           ? Center(
-              child: loadingWidget ??
+              child:
+                  loadingWidget ??
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

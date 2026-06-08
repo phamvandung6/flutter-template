@@ -130,11 +130,10 @@ extension ResponsiveExtension on BuildContext {
     required T mobile,
     T? tablet,
     T? desktop,
-  }) =>
-      Responsive.responsiveValue(
-        this,
-        mobile: mobile,
-        tablet: tablet,
-        desktop: desktop,
-      );
+  }) => Responsive.responsiveValue(
+    this,
+    mobile: mobile,
+    tablet: tablet,
+    desktop: desktop,
+  );
 }

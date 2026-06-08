@@ -27,16 +27,16 @@ class AppThemeData {
 @injectable
 class ThemeCubit extends BaseCubit<AppThemeData> {
   ThemeCubit(AppLogger logger)
-      : super(
-          const BaseBlocState<AppThemeData>(
-            status: BlocStatus.success,
-            data: AppThemeData(
-              mode: AppThemeMode.system,
-              isDark: false,
-            ),
+    : super(
+        const BaseBlocState<AppThemeData>(
+          status: BlocStatus.success,
+          data: AppThemeData(
+            mode: AppThemeMode.system,
+            isDark: false,
           ),
-          logger,
-        );
+        ),
+        logger,
+      );
 
   /// Set theme mode
   void setThemeMode(AppThemeMode mode) {

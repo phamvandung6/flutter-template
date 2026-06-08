@@ -63,6 +63,7 @@ class NetworkInfoImpl implements NetworkInfo {
       case ConnectivityResult.none:
       case ConnectivityResult.bluetooth:
       case ConnectivityResult.vpn:
+      case ConnectivityResult.satellite:
       case ConnectivityResult.other:
         return false;
     }

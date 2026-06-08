@@ -5,7 +5,7 @@ part 'login_request_dto.g.dart';
 
 /// Data Transfer Object for login request
 @freezed
-class LoginRequestDto with _$LoginRequestDto {
+abstract class LoginRequestDto with _$LoginRequestDto {
   const factory LoginRequestDto({
     required String email,
     required String password,

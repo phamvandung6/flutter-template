@@ -7,8 +7,10 @@ void main() {
     test('should be equatable', () {
       const failure1 = ServerFailure(message: 'Test message', statusCode: 500);
       const failure2 = ServerFailure(message: 'Test message', statusCode: 500);
-      const failure3 =
-          ServerFailure(message: 'Different message', statusCode: 500);
+      const failure3 = ServerFailure(
+        message: 'Different message',
+        statusCode: 500,
+      );
 
       expect(failure1, equals(failure2));
       expect(failure1, isNot(equals(failure3)));
@@ -103,8 +105,10 @@ void main() {
       const message = 'Validation error occurred';
       const statusCode = 400;
 
-      const failure =
-          ValidationFailure(message: message, statusCode: statusCode);
+      const failure = ValidationFailure(
+        message: message,
+        statusCode: statusCode,
+      );
 
       expect(failure.message, equals(message));
       expect(failure.statusCode, equals(statusCode));
@@ -116,8 +120,10 @@ void main() {
     });
 
     test('should have toString implementation', () {
-      const failure =
-          ValidationFailure(message: 'Validation error', statusCode: 400);
+      const failure = ValidationFailure(
+        message: 'Validation error',
+        statusCode: 400,
+      );
       final string = failure.toString();
 
       expect(string, contains('ValidationFailure'));
@@ -131,8 +137,10 @@ void main() {
       const message = 'Authentication failed';
       const statusCode = 401;
 
-      const failure =
-          AuthenticationFailure(message: message, statusCode: statusCode);
+      const failure = AuthenticationFailure(
+        message: message,
+        statusCode: statusCode,
+      );
 
       expect(failure.message, equals(message));
       expect(failure.statusCode, equals(statusCode));
@@ -144,8 +152,10 @@ void main() {
     });
 
     test('should have toString implementation', () {
-      const failure =
-          AuthenticationFailure(message: 'Auth failed', statusCode: 401);
+      const failure = AuthenticationFailure(
+        message: 'Auth failed',
+        statusCode: 401,
+      );
       final string = failure.toString();
 
       expect(string, contains('AuthenticationFailure'));

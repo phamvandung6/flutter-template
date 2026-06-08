@@ -7,7 +7,7 @@ part 'user_dto.g.dart';
 
 /// Data Transfer Object for User - maps to/from API responses
 @freezed
-class UserDto with _$UserDto {
+abstract class UserDto with _$UserDto {
   const factory UserDto({
     required String id,
     @JsonKey(name: 'first_name') required String firstName,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
@@ -65,7 +67,7 @@ extension NavigationExtension on BuildContext {
 
   /// Push route
   void pushTo(String route, {Map<String, dynamic>? extra}) {
-    push(route, extra: extra);
+    unawaited(push(route, extra: extra));
   }
 
   /// Pop current route

@@ -18,8 +18,7 @@ class ApiResponse<T> {
   factory ApiResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$ApiResponseFromJson(json, fromJsonT);
+  ) => _$ApiResponseFromJson(json, fromJsonT);
 
   /// Factory for successful response
   factory ApiResponse.success({
@@ -27,14 +26,13 @@ class ApiResponse<T> {
     String? message,
     int? statusCode,
     Map<String, dynamic>? meta,
-  }) =>
-      ApiResponse(
-        success: true,
-        data: data,
-        message: message,
-        statusCode: statusCode,
-        meta: meta,
-      );
+  }) => ApiResponse(
+    success: true,
+    data: data,
+    message: message,
+    statusCode: statusCode,
+    meta: meta,
+  );
 
   /// Factory for error response
   factory ApiResponse.error({
@@ -43,15 +41,14 @@ class ApiResponse<T> {
     Map<String, dynamic>? errorDetails,
     int? statusCode,
     Map<String, dynamic>? meta,
-  }) =>
-      ApiResponse(
-        success: false,
-        message: message,
-        errorCode: errorCode,
-        errorDetails: errorDetails,
-        statusCode: statusCode,
-        meta: meta,
-      );
+  }) => ApiResponse(
+    success: false,
+    message: message,
+    errorCode: errorCode,
+    errorDetails: errorDetails,
+    statusCode: statusCode,
+    meta: meta,
+  );
   final bool success;
   final String? message;
   final T? data;
@@ -97,8 +94,7 @@ class PaginatedResponse<T> {
   factory PaginatedResponse.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) =>
-      _$PaginatedResponseFromJson(json, fromJsonT);
+  ) => _$PaginatedResponseFromJson(json, fromJsonT);
   final List<T> data;
   final PaginationMeta meta;
 

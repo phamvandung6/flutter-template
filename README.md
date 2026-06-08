@@ -4,51 +4,63 @@ A Clean Architecture Flutter template with modern development practices.
 
 ## Features
 
-- **Clean Architecture** (Domain/Data/Presentation)
-- **BLoC State Management** with base classes
-- **Dependency Injection** (GetIt + Injectable)
-- **Type-safe API** (Dio + Retrofit)
-- **Material Design 3** theme system
-- **Environment Configuration** (Dev/Staging/Prod)
-- **Code Generation** setup
-- **Comprehensive Testing** framework
+- Clean Architecture with domain, data, and presentation layers
+- BLoC state management with reusable base classes
+- Dependency injection with GetIt and Injectable
+- Type-safe API layer with Dio and Retrofit
+- Material Design 3 theme system
+- Environment configuration for development, staging, and production
+- Freezed, JSON, Retrofit, and Injectable code generation
+- Unit and widget test setup
+- FVM-pinned Flutter SDK
 
 ## Quick Start
 
 ```bash
-# Setup
-flutter pub get
+# Install the pinned Flutter SDK, fetch dependencies, generate code, format, and analyze
 make dev-setup
 
+# Windows PowerShell
+.\scripts\dev-setup.ps1
+
 # Run app
-make run-dev        # Development
-make run-staging    # Staging  
-make run-prod       # Production
+make run-dev
+make run-staging
+make run-prod
 ```
 
 ## Project Structure
 
-```
+```text
 lib/
 ├── core/                 # Core functionality
-│   ├── bloc/            # Global BLoC observers
-│   ├── config/          # App configuration & environments
-│   ├── di/              # Dependency injection
-│   ├── error/           # Error handling
-│   ├── navigation/      # Routing & navigation
-│   ├── network/         # HTTP client & API
-│   └── utils/           # Utilities & helpers
-├── features/            # Feature modules
-│   ├── auth/           # Authentication
-│   ├── home/           # Home screen
-│   ├── splash/         # Splash screen
-│   └── error/          # Error pages
-├── shared/             # Shared components
-│   ├── presentation/   # Base BLoC/Cubit classes
-│   ├── theme/          # Theme system
-│   ├── utils/          # Shared utilities
-│   └── widgets/        # Reusable UI components
-└── main.dart           # App entry point
+│   ├── bloc/             # Global BLoC observers
+│   ├── config/           # App configuration and environments
+│   ├── di/               # Dependency injection
+│   ├── error/            # Error handling
+│   ├── navigation/       # Routing and navigation
+│   ├── network/          # HTTP client and API
+│   └── utils/            # Utilities and helpers
+├── features/             # Feature modules
+│   ├── auth/             # Authentication
+│   ├── home/             # Home screen
+│   ├── splash/           # Splash screen
+│   └── error/            # Error pages
+├── shared/               # Shared components
+│   ├── presentation/     # Base BLoC/Cubit classes
+│   ├── theme/            # Theme system
+│   ├── utils/            # Shared utilities
+│   └── widgets/          # Reusable UI components
+└── main.dart             # App entry point
+```
+
+## Toolchain
+
+This project is pinned to Flutter `3.44.1` via FVM. Makefile commands run
+through `fvm flutter` and `fvm dart`, so install FVM before using them.
+
+```bash
+fvm flutter --version
 ```
 
 ## Available Commands
@@ -56,17 +68,30 @@ lib/
 ```bash
 make help              # Show all available commands
 
+# Setup
+make fvm-install       # Install/use pinned Flutter SDK
+make dev-setup         # Full setup: FVM, pub get, codegen, format, analyze
+make setup-hooks       # Configure Git hooks
+
 # Development
 make get               # Get dependencies
 make build-runner      # Generate code
+make sort-imports      # Sort imports
+make format            # Check formatting
 make quality           # Format, sort imports, analyze
-make test              # Run all tests
+make quality-check     # Analyze and check formatting
 make clean             # Clean build artifacts
 
+# Testing
+make test              # Run all tests
+make test-unit         # Run unit tests only
+make test-widget       # Run widget tests only
+make test-coverage     # Run tests with coverage
+
 # Running
-make run-dev           # Run development
-make run-staging       # Run staging
-make run-prod          # Run production
+make run-dev           # Run development flavor
+make run-staging       # Run staging flavor
+make run-prod          # Run production flavor
 
 # Building
 make build-android     # Build Android APK
@@ -74,22 +99,30 @@ make build-ios         # Build iOS
 make build-web         # Build web
 ```
 
+Windows PowerShell alternatives:
+
+```powershell
+.\scripts\dev-setup.ps1
+.\scripts\quality-check.ps1
+.\scripts\test.ps1
+```
+
 ## Architecture
 
 ### Clean Architecture Layers
 
-- **Presentation**: BLoC/Pages/Widgets
-- **Domain**: Entities/Use Cases/Repository Interfaces  
-- **Data**: Models/Data Sources/Repository Implementations
+- Presentation: BLoC, pages, and widgets
+- Domain: entities, use cases, and repository interfaces
+- Data: models, data sources, and repository implementations
 
 ### State Management
 
-Using BLoC pattern with single state architecture:
+The template uses BLoC with a reusable single-state pattern:
 
 ```dart
 class UserBloc extends BaseBloc<User> {
   UserBloc(this._getUserUseCase) : super(BaseBlocState.initial());
-  
+
   Future<void> loadUser() async {
     await handleEitherResult(
       _getUserUseCase(NoParams()),
@@ -101,59 +134,56 @@ class UserBloc extends BaseBloc<User> {
 
 ### Key Dependencies
 
-- `flutter_bloc`: State management
-- `get_it` + `injectable`: Dependency injection
-- `dio` + `retrofit`: HTTP client
-- `go_router`: Navigation
-- `dartz`: Functional programming
-- `very_good_analysis`: Linting
+- `flutter_bloc`: state management
+- `get_it` and `injectable`: dependency injection
+- `dio` and `retrofit`: HTTP client and API generation
+- `freezed` and `json_serializable`: immutable models and JSON
+- `go_router`: navigation
+- `dartz`: functional result types
+- `very_good_analysis`: linting baseline
 
 ## Environment Setup
 
-### Development
+Each environment has configuration in `lib/core/config/environments/`.
+
 ```bash
 make run-dev
-```
-
-### Staging  
-```bash
 make run-staging
-```
-
-### Production
-```bash
 make run-prod
 ```
 
-Each environment has its own configuration in `lib/core/config/environments/`.
+## Code Generation
+
+Run code generation after editing Freezed models, JSON DTOs, Retrofit clients,
+or Injectable registrations.
+
+```bash
+make build-runner
+```
+
+Generated files are ignored by git, so a fresh clone should run `make dev-setup`.
 
 ## Testing
 
 ```bash
-make test              # All tests
-make test-unit         # Unit tests only
-make test-widget       # Widget tests only
-make test-coverage     # With coverage report
+make test
+make test-unit
+make test-widget
+make test-coverage
 ```
 
 ## Code Quality
 
 ```bash
-make quality           # Fix formatting, imports, analyze
-make quality-check     # Check only (for CI)
-make pre-commit        # Full pre-commit checks
+make quality
+make quality-check
+make pre-commit
 ```
 
 ## Contributing
 
-1. Fork the repository
-2. Create feature branch: `git checkout -b feature/new-feature`
-3. Make changes and add tests
-4. Run quality checks: `make pre-commit`
-5. Submit pull request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines.
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) for details.

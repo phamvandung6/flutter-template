@@ -62,10 +62,10 @@ class AppTextField extends StatefulWidget {
     this.textInputAction,
     this.focusNode,
     this.contentPadding,
-  })  : type = AppTextFieldType.email,
-        maxLines = 1,
-        maxLength = null,
-        obscureText = false;
+  }) : type = AppTextFieldType.email,
+       maxLines = 1,
+       maxLength = null,
+       obscureText = false;
 
   /// Password text field constructor
   const AppTextField.password({
@@ -89,10 +89,10 @@ class AppTextField extends StatefulWidget {
     this.textInputAction,
     this.focusNode,
     this.contentPadding,
-  })  : type = AppTextFieldType.password,
-        maxLines = 1,
-        maxLength = null,
-        obscureText = true;
+  }) : type = AppTextFieldType.password,
+       maxLines = 1,
+       maxLength = null,
+       obscureText = true;
 
   /// Multiline text field constructor
   const AppTextField.multiline({
@@ -118,8 +118,8 @@ class AppTextField extends StatefulWidget {
     this.textInputAction,
     this.focusNode,
     this.contentPadding,
-  })  : type = AppTextFieldType.multiline,
-        obscureText = false;
+  }) : type = AppTextFieldType.multiline,
+       obscureText = false;
   final String? label;
   final String? hint;
   final String? helperText;

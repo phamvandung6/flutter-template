@@ -15,7 +15,7 @@ enum BlocStatus {
 
 /// Base state class using single state approach with enum
 @freezed
-class BaseBlocState<T> with _$BaseBlocState<T> {
+abstract class BaseBlocState<T> with _$BaseBlocState<T> {
   const factory BaseBlocState({
     @Default(BlocStatus.initial) BlocStatus status,
     T? data,

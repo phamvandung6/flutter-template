@@ -141,10 +141,10 @@ class AppConfig {
 
   /// Get network timeouts
   static Map<String, int> get networkTimeouts => {
-        'connect': config.connectTimeout,
-        'receive': config.receiveTimeout,
-        'send': config.sendTimeout,
-      };
+    'connect': config.connectTimeout,
+    'receive': config.receiveTimeout,
+    'send': config.sendTimeout,
+  };
 
   /// Get environment-specific bundle ID
   static String get bundleId {

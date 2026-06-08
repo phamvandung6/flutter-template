@@ -20,6 +20,10 @@ analyzer:
   errors:
     # Ignore JsonKey warnings in Freezed constructor parameters
     invalid_annotation_target: ignore
+    # Deprecated lints can linger in upstream lint sets after SDK upgrades
+    deprecated_lint: ignore
+    # Exhaustive switches may make old default branches redundant after SDK upgrades
+    unreachable_switch_default: ignore
     # Treat missing required parameters as errors
     missing_required_param: error
     # Treat missing return types as warnings
@@ -67,8 +71,14 @@ linter:
     cancel_subscriptions: true
     close_sinks: true
     
+    # Boilerplate ergonomics - style-only rules relaxed
+    specify_nonobvious_property_types: false
+    use_null_aware_elements: false
+    avoid_types_on_closure_parameters: false
+    matching_super_parameters: false
+    
     # Null safety - Keep for safety
-    avoid_null_checks_in_equality_operators: true
+    avoid_null_checks_in_equality_operators: false
     prefer_is_empty: true
     prefer_is_not_empty: true
     

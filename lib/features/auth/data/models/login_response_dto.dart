@@ -7,7 +7,7 @@ part 'login_response_dto.g.dart';
 
 /// Data Transfer Object for login response
 @freezed
-class LoginResponseDto with _$LoginResponseDto {
+abstract class LoginResponseDto with _$LoginResponseDto {
   const factory LoginResponseDto({
     @JsonKey(name: 'access_token') required String accessToken,
     @JsonKey(name: 'refresh_token') required String refreshToken,
