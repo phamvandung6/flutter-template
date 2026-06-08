@@ -13,6 +13,8 @@ paths:
 - Prefer Cubit for simple state; use Bloc for event-driven flows that need
   traceability or event transformers.
 - Keep domain business rules in use cases, not in Cubit/BLoC.
+- Do not add `flutter_hooks` by default. If a feature needs it, use hooks only
+  for local widget lifecycle helpers such as controllers or local animations.
 - Add new dependencies through DI when they cross feature or infrastructure
   boundaries.
 - Use explicit DTO/entity mapping at data/domain boundaries.

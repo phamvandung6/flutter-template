@@ -29,6 +29,11 @@ the smallest relevant skill set before editing.
   for domain business rules.
 - Use `BaseViewState<T>` for simple async view state. Use feature-specific
   Freezed state for forms, pagination, upload progress, or realtime screens.
+- Do not add `flutter_hooks` by default.
+- If a feature needs hooks, use them only for local widget lifecycle concerns:
+  controllers, local animation, debounced local input, or small reusable UI
+  lifecycle helpers.
+- Do not use hooks as a replacement for Cubit/BLoC feature state.
 - Add tests near the behavior being changed.
 
 ## Memory Workflow

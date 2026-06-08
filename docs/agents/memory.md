@@ -37,6 +37,10 @@ sessions. It is not a scratchpad and must not contain secrets.
 - Keep domain business rules in use cases, not in Cubit/BLoC.
 - Keep `BaseBlocEvent` minimal; feature-specific events should live with each
   feature instead of relying on generic refresh/reset/retry events.
+- Do not include `flutter_hooks` by default. Add it only when a concrete feature
+  needs reusable local widget lifecycle helpers.
+- If hooks are introduced, keep them presentation-only and do not use them as a
+  replacement for Cubit/BLoC feature state.
 - Keep generated files out of git to reduce template noise.
 
 ## Do Not Store Here

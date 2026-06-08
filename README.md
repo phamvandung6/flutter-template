@@ -5,7 +5,7 @@ A Clean Architecture Flutter template with modern development practices.
 ## Features
 
 - Clean Architecture with domain, data, and presentation layers
-- BLoC state management with reusable base classes
+- Cubit-first state management with BLoC support and reusable view states
 - Dependency injection with GetIt and Injectable
 - Type-safe API layer with Dio and Retrofit
 - Material Design 3 theme system
@@ -181,6 +181,29 @@ class UserBloc extends BaseBloc<UserEvent, User> {
 }
 ```
 
+### Optional Flutter Hooks
+
+`flutter_hooks` is not included by default. Add it only when a real feature needs
+reusable local widget lifecycle logic.
+
+Good fits for hooks:
+
+- Text, focus, scroll, page, tab, and animation controllers local to a widget.
+- Small local UI state that does not belong in Cubit/BLoC.
+- Reusable UI lifecycle helpers such as debounced text input or fade-in
+  animation hooks.
+
+Avoid hooks for:
+
+- Domain business rules.
+- Auth/session state.
+- API loading state for a screen.
+- Pagination, upload, sync, checkout, or other multi-step flows.
+- State that should be tested independently from widgets.
+
+If hooks are added later, keep them presentation-only and prefer names starting
+with `use...`.
+
 ### Key Dependencies
 
 - `flutter_bloc`: state management
@@ -190,6 +213,10 @@ class UserBloc extends BaseBloc<UserEvent, User> {
 - `go_router`: navigation
 - `dartz`: functional result types
 - `very_good_analysis`: linting baseline
+
+Optional, add only when needed:
+
+- `flutter_hooks`: reusable local widget lifecycle helpers
 
 ## Environment Setup
 

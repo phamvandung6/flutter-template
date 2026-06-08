@@ -84,11 +84,17 @@ make test
 - Prefer Cubit for simple presentation/application state.
 - Use BLoC when explicit events, traceability, or event transformers are useful.
 - Keep domain business rules in use cases, not in Cubit/BLoC.
+- Do not add `flutter_hooks` by default. Add it only when a feature needs
+  reusable local widget lifecycle helpers.
+- If hooks are introduced, keep them presentation-only and never use them as a
+  replacement for Cubit/BLoC feature state.
 
 ## Dependency And Codegen Rules
 
 - Ask before adding new production dependencies.
 - Prefer existing packages already in `pubspec.yaml`.
+- `flutter_hooks` is optional; add it only for concrete UI lifecycle needs such
+  as controllers, local animations, or reusable debounced input helpers.
 - After dependency changes, run `fvm flutter pub get`.
 - After generator input changes, run `fvm dart run build_runner build`.
 - Generated files are gitignored; fresh clones must run setup/codegen.

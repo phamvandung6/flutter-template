@@ -7,6 +7,7 @@
 | SDK | Flutter 3.44.1 via FVM |
 | Language | Dart 3.12.1 |
 | State | flutter_bloc, Cubit-first with BLoC for event-driven flows |
+| Local widget lifecycle | StatefulWidget by default; flutter_hooks optional when needed |
 | DI | get_it, injectable |
 | Navigation | go_router |
 | HTTP | dio, retrofit |
@@ -71,6 +72,17 @@ UI event
   screens should define their own Freezed state.
 - Do not wire one Bloc/Cubit directly into another. Share data through use cases,
   repositories, streams, or UI-level listeners.
+
+## Flutter Hooks Policy
+
+- Do not include `flutter_hooks` in the boilerplate by default.
+- Add `flutter_hooks` only when a feature has repeated local widget lifecycle
+  logic that is cleaner as a hook.
+- Good hook use cases: text/focus/scroll/tab/page/animation controllers,
+  debounced local input, small reusable UI lifecycle helpers.
+- Hooks must stay in the presentation layer and use `use...` naming.
+- Do not use hooks for domain rules, API screen state, auth/session state,
+  pagination, upload, checkout, sync, or other feature workflows.
 
 ## Routing
 
