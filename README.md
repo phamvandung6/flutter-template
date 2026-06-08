@@ -84,6 +84,8 @@ make setup-hooks       # Configure Git hooks
 # Development
 make get               # Get dependencies
 make build-runner      # Generate code
+make gen-icons         # Generate launcher icons after adding brand assets
+make gen-splash        # Generate native splash after adding brand assets
 make sort-imports      # Sort imports
 make format            # Check formatting
 make quality           # Format, sort imports, analyze
@@ -213,6 +215,8 @@ with `use...`.
 - `go_router`: navigation
 - `dartz`: functional result types
 - `very_good_analysis`: linting baseline
+- `flutter_native_splash`: native splash generation
+- `flutter_launcher_icons`: launcher icon generation
 
 Optional, add only when needed:
 
@@ -238,6 +242,23 @@ make build-runner
 ```
 
 Generated files are ignored by git, so a fresh clone should run `make dev-setup`.
+
+## Branding Generation
+
+Branding generators are included as dev tools, but real brand assets are not
+included in the boilerplate. Before generating icons or splash screens:
+
+1. Add project assets such as `assets/branding/app_icon.png` and
+   `assets/branding/splash_logo.png`.
+2. Copy the example configs from `tool/branding/*.example` to matching `.yaml`
+   files.
+3. Adjust colors and paths.
+4. Run:
+
+```bash
+make gen-icons
+make gen-splash
+```
 
 ## Testing
 

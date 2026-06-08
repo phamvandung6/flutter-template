@@ -65,6 +65,8 @@ dev_dependencies:
   import_sorter: ^4.6.0
   bloc_test: ^10.0.0
   patrol: ^4.6.1
+  flutter_native_splash: ^2.4.8
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

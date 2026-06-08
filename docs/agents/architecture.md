@@ -14,6 +14,7 @@
 | Models | freezed, json_serializable |
 | Functional results | dartz Either |
 | Storage | flutter_secure_storage |
+| Branding tools | flutter_native_splash, flutter_launcher_icons |
 | Lints | very_good_analysis plus local relaxations |
 | Tests | flutter_test, bloc_test, mocktail |
 
@@ -105,6 +106,15 @@ Do not edit generated files directly. Regenerate with:
 ```bash
 fvm dart run build_runner build
 ```
+
+## Branding Generation
+
+- `flutter_native_splash` and `flutter_launcher_icons` are dev tools for app
+  branding.
+- The boilerplate keeps only example configs in `tool/branding/`.
+- Do not run branding generators until real project assets exist.
+- Copy `tool/branding/*.example` to `.yaml`, adjust asset paths/colors, then run
+  `make gen-icons` and `make gen-splash`.
 
 ## Current Known Placeholders
 

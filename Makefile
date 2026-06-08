@@ -5,7 +5,7 @@ FVM ?= fvm
 FLUTTER := $(FVM) flutter
 DART := $(FVM) dart
 
-.PHONY: help fvm-install build-runner clean get test test-unit test-widget test-coverage-html analyze format lint quality quality-check pre-commit setup-hooks watch
+.PHONY: help fvm-install build-runner clean get test test-unit test-widget test-coverage-html analyze format lint quality quality-check pre-commit setup-hooks watch gen-splash gen-icons gen-branding
 
 # Default target
 help: ## Show this help message
@@ -43,6 +43,14 @@ gen-retrofit: ## Generate Retrofit API client code only
 
 gen-freezed: ## Generate Freezed classes only
 	$(DART) run build_runner build freezed
+
+gen-splash: ## Generate native splash screens from tool/branding/flutter_native_splash.yaml
+	$(DART) run flutter_native_splash:create --path=tool/branding/flutter_native_splash.yaml
+
+gen-icons: ## Generate launcher icons from tool/branding/flutter_launcher_icons.yaml
+	$(DART) run flutter_launcher_icons -f tool/branding/flutter_launcher_icons.yaml
+
+gen-branding: gen-icons gen-splash ## Generate launcher icons and native splash screens
 
 # Code Quality
 analyze: ## Run Flutter analyzer

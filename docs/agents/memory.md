@@ -41,6 +41,8 @@ sessions. It is not a scratchpad and must not contain secrets.
   needs reusable local widget lifecycle helpers.
 - If hooks are introduced, keep them presentation-only and do not use them as a
   replacement for Cubit/BLoC feature state.
+- `flutter_native_splash` and `flutter_launcher_icons` are included as dev tools,
+  but generator configs stay as examples until real brand assets exist.
 - Keep generated files out of git to reduce template noise.
 
 ## Do Not Store Here

@@ -97,6 +97,8 @@ make test
   as controllers, local animations, or reusable debounced input helpers.
 - After dependency changes, run `fvm flutter pub get`.
 - After generator input changes, run `fvm dart run build_runner build`.
+- Branding generators use example configs in `tool/branding/`; run them only
+  after real project icon/splash assets exist.
 - Generated files are gitignored; fresh clones must run setup/codegen.
 
 ## Testing Rules

@@ -13,6 +13,7 @@ the smallest relevant skill set before editing.
 | Verification before handoff | Verification loop |
 | Security-sensitive auth/storage/networking | Security review |
 | Dependency or package docs | Documentation lookup / official docs |
+| Branding/icon/splash setup | Flutter patterns plus official package docs |
 | UI polish or widgets | Frontend/a11y plus Flutter patterns |
 
 ## Flutter Implementation Rules
@@ -34,6 +35,8 @@ the smallest relevant skill set before editing.
   controllers, local animation, debounced local input, or small reusable UI
   lifecycle helpers.
 - Do not use hooks as a replacement for Cubit/BLoC feature state.
+- Use `flutter_native_splash` and `flutter_launcher_icons` only after real brand
+  assets are available.
 - Add tests near the behavior being changed.
 
 ## Memory Workflow
