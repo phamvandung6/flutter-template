@@ -29,6 +29,25 @@ make run-staging
 make run-prod
 ```
 
+## Using This Template
+
+After creating a new repository from this template, rename the boilerplate values
+before building your app:
+
+1. Update `name` and `description` in `pubspec.yaml`.
+2. Replace Dart imports that start with `package:flutter_template/` if you change
+   the package name.
+3. Replace Android identifiers in `android/app/build.gradle` and
+   `android/app/src/main/kotlin/com/example/flutter_template/`.
+4. Replace iOS bundle identifiers and display names in `ios/Runner/Info.plist`
+   and the Xcode project settings.
+5. Update app names, bundle IDs, database names, and API base URLs in
+   `lib/core/config/environments/`.
+6. Run `fvm flutter pub get` and `fvm dart run build_runner build`.
+
+Generated files are intentionally ignored. Run code generation after cloning or
+after changing Freezed, JSON, Retrofit, or Injectable inputs.
+
 ## Project Structure
 
 ```text
