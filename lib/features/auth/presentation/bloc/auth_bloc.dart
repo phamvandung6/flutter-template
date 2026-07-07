@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:flutter_template/core/domain/usecase.dart';
 import 'package:flutter_template/core/utils/logger.dart';
-import 'package:flutter_template/core/utils/usecase.dart';
 import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter_template/features/auth/domain/usecases/get_current_user.dart';
 import 'package:flutter_template/features/auth/domain/usecases/login_user.dart';

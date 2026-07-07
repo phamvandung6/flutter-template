@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:flutter_template/core/domain/usecase.dart';
 import 'package:flutter_template/core/utils/typedef.dart';
-import 'package:flutter_template/core/utils/usecase.dart';
 import 'package:flutter_template/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter_template/features/auth/domain/repositories/auth_repository.dart';
 

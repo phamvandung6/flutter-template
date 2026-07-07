@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:flutter_template/core/domain/usecase.dart';
 import 'package:flutter_template/core/error/failures.dart';
 import 'package:flutter_template/core/utils/typedef.dart';
-import 'package:flutter_template/core/utils/usecase.dart';
 
 // Test implementation of UseCase
 class TestUseCase extends UseCase<String, TestParams> {

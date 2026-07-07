@@ -56,6 +56,7 @@ lib/
 |   |-- bloc/             # Global BLoC observers
 |   |-- config/           # App configuration and environments
 |   |-- di/               # Dependency injection
+|   |-- domain/           # Shared domain primitives and use case base classes
 |   |-- error/            # Error handling
 |   |-- navigation/       # Routing and navigation
 |   |-- network/          # HTTP client and API

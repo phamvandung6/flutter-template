@@ -77,7 +77,7 @@ make test
 - `features/<feature>/domain`: entities, repository contracts, use cases.
 - `features/<feature>/data`: DTOs, data sources, repository implementations.
 - `features/<feature>/presentation`: BLoC/Cubit, state/events, pages/widgets.
-- `core/`: app-wide config, DI, navigation, networking, error handling, utilities.
+- `core/`: app-wide config, shared domain primitives, DI, navigation, networking, error handling, utilities.
 - `shared/`: reusable theme, widgets, base BLoC/Cubit primitives.
 - Do not make UI depend directly on remote/local data sources.
 - Do not make domain depend on Flutter, Dio, Retrofit, or storage.

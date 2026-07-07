@@ -26,10 +26,11 @@ lib/
 |   |-- bloc/             # Global BLoC observer
 |   |-- config/           # Environment configuration
 |   |-- di/               # Injectable/GetIt setup
+|   |-- domain/           # Shared domain primitives and use case base classes
 |   |-- error/            # Exceptions and failures
 |   |-- navigation/       # GoRouter, guards, observers, navigation service
 |   |-- network/          # Dio client, API responses, interceptors
-|   `-- utils/            # Logger, typedefs, use case base classes
+|   `-- utils/            # Logger and generic helpers
 |-- features/
 |   |-- auth/             # Clean Architecture auth module
 |   |-- error/            # Error and not found pages
