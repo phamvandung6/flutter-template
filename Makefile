@@ -71,12 +71,14 @@ quality: ## Run full code quality checks (analyze + format + imports)
 	$(DART) format lib/ test/ --fix
 	$(FLUTTER) analyze
 
-quality-check: ## Check code quality without fixing
+quality-check: ## Check code quality for pre-commit
 	@echo "🔍 Checking code quality..."
-	$(FLUTTER) analyze
+	$(DART) run import_sorter:main
+	@git diff --quiet -- lib test || (echo "Import sorter changed files. Please review and stage the changes, then run quality-check again."; exit 1)
 	$(DART) format lib/ test/ --set-exit-if-changed
+	$(FLUTTER) analyze
 
-pre-commit: quality-check test ## Run pre-commit checks (quality + tests)
+pre-commit: quality-check ## Run pre-commit checks
 	@echo "✅ Pre-commit checks passed!"
 
 setup-hooks: ## Setup Git pre-commit hooks

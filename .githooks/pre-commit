@@ -9,13 +9,18 @@ if ! command -v fvm >/dev/null 2>&1; then
     exit 1
 fi
 
-echo "Running analyzer..."
-fvm flutter analyze
+echo "Sorting imports..."
+fvm dart run import_sorter:main
+
+if ! git diff --quiet -- lib test; then
+    echo "Import sorter changed files. Please review and stage the changes, then commit again."
+    exit 1
+fi
 
 echo "Checking formatting..."
 fvm dart format lib/ test/ --set-exit-if-changed
 
-echo "Running tests..."
-fvm flutter test
+echo "Running analyzer..."
+fvm flutter analyze
 
 echo "All pre-commit checks passed."

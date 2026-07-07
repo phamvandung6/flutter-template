@@ -6,7 +6,7 @@ sessions. It is not a scratchpad and must not contain secrets.
 ## Stable Facts
 
 - The project is a Flutter boilerplate, not a finished product app.
-- Flutter is pinned with FVM in `.fvmrc` to `3.44.1`.
+- Flutter is pinned with FVM in `.fvmrc` to `3.44.5`.
 - Generated files are ignored by git; run codegen after a fresh clone.
 - Windows machines may not have `make`; use `scripts/*.ps1` as the portable path
   for this repo owner.

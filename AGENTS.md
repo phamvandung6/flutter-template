@@ -5,7 +5,7 @@ agents. Keep this file concise; put longer background in `docs/agents/`.
 
 ## Project Snapshot
 
-- Flutter boilerplate pinned by FVM to Flutter `3.44.1` and Dart `3.12.1`.
+- Flutter boilerplate pinned by FVM to Flutter `3.44.5` and Dart `3.12.2`.
 - Architecture: Clean Architecture with `core/`, `features/`, and `shared/`.
 - State management: Cubit-first with BLoC for event-driven flows, using reusable
   base view state classes for simple async screens.

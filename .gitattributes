@@ -1,0 +1,40 @@
+# Normalize text files to LF in the repository so Windows and Linux developers
+# get consistent diffs. Git may still adapt working-tree line endings based on
+# local config, but committed content stays LF.
+* text=auto eol=lf
+
+# Source and project text files.
+*.dart text eol=lf
+*.kt text eol=lf
+*.swift text eol=lf
+*.gradle text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.plist text eol=lf
+*.pbxproj text eol=lf
+*.xcsettings text eol=lf
+*.xcscheme text eol=lf
+*.xcconfig text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.properties text eol=lf
+*.lock text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=lf
+Makefile text eol=lf
+.githooks/* text eol=lf
+
+# Binary assets.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.jar binary
+*.keystore binary
+*.jks binary

@@ -64,7 +64,7 @@ This repository includes shared agent instructions:
 
 ## Toolchain
 
-This project is pinned to Flutter `3.44.1` via FVM. Makefile commands run
+This project is pinned to Flutter `3.44.5` via FVM. Makefile commands run
 through `fvm flutter` and `fvm dart`, so install FVM before using them.
 
 ```bash

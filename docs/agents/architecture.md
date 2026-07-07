@@ -4,8 +4,8 @@
 
 | Concern | Choice |
 | --- | --- |
-| SDK | Flutter 3.44.1 via FVM |
-| Language | Dart 3.12.1 |
+| SDK | Flutter 3.44.5 via FVM |
+| Language | Dart 3.12.2 |
 | State | flutter_bloc, Cubit-first with BLoC for event-driven flows |
 | Local widget lifecycle | StatefulWidget by default; flutter_hooks optional when needed |
 | DI | get_it, injectable |
