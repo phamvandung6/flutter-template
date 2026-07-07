@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+echo "Running pre-commit checks..."
+
+if ! command -v fvm >/dev/null 2>&1; then
+    echo "FVM is not installed. Please install FVM to run pre-commit checks."
+    exit 1
+fi
+
+echo "Running analyzer..."
+fvm flutter analyze
+
+echo "Checking formatting..."
+fvm dart format lib/ test/ --set-exit-if-changed
+
+echo "Running tests..."
+fvm flutter test
+
+echo "All pre-commit checks passed."
